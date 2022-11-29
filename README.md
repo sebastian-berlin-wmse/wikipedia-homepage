@@ -1,18 +1,24 @@
-# Wikipedia.de
+# Wikipedia homepage
 
-This code is used on wikipedia.de. It provides functionalities to run 
-search queries and suggests page titles based on search strings.
+A homepage for Wikipedia that can be used for alternative URLs, such
+as wikipedia.se. Has a search box for Wikipedia and space for
+information about chapter, user group or similar.
 
-It can be configured to retrieve featured content and banners from a 
-remote MediaWiki installation.
+Based on [Wikimedia.de](https://github.com/wmde/Wikipedia.de)
+developed by [Wikimedia Deutschland](https://www.wikimedia.de).
 
-## Installation
+## Running
 
-Copy ```inc/config.sample.inc.php``` to ```inc/config.inc.php```. See 
-inline comments for configuration options.
+It's recommended to use venv.
 
-Run
+Install dependencies:
+```
+pip install -r requirements.txt
+```
 
-    docker-compose up
-    
-You can reach the local version of this project at [http://localhost:8085/](http://localhost:8085/)
+Start with:
+```
+flask run
+```
+
+Add `--debug` when developing to make your life easier.
