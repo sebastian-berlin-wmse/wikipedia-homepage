@@ -294,7 +294,7 @@ p {
 	border-color: #447ff5;
 }
 .search-icon {
-	background-image: url(img/wmde_search_icon.svg);
+	background-image: url(images/wmde_search_icon.svg);
 	background-repeat: no-repeat;
 	display: inline-block;
 	vertical-align: middle;

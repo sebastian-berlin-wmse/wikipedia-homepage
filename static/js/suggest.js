@@ -20,7 +20,7 @@ function searchSuggest( lang ) {
 	if ( str == "" ) {
 		hideSuggest();
 	} else {
-		$.ajax( 'suggest.php', {
+		$.ajax( 'suggest', {
 			data: {
 				lang: searchLang,
 				search: str
@@ -52,18 +52,9 @@ function getSearchLink( query, language, provider ) {
 	return searchPath + '?' + $.param( queryParams );
 }
 
-function handleSearchSuggest( response ) {
+function handleSearchSuggest( searchResults ) {
 	var searchString = lastSearch;
-	if( response == null ) return;
-
 	var ss = $( '#search_suggest' ).empty().show();
-	var searchResults = response.split( "\n" );
-
-	// Removing first element because it's the search string itself
-	searchResults.shift();
-
-	// Removing the last element because it is always an empty string
-	searchResults.pop();
 
 	$.each( searchResults, function( index, row ) {
 
