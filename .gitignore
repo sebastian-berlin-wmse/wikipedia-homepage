@@ -1,5 +1,1 @@
-composer.lock
-!.*
-.idea/
-
-cache/
+__pycache__/
