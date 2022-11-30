@@ -57,34 +57,5 @@
             </div>
         </footer>
     </div>
-
-<!-- Matomo -->
-<script defer type="text/javascript" src="tracking.js"></script>
-<noscript><p><img src="//stats.wikimedia.de/piwik.php?idsite=3&amp;rec=1" style="border:0;" alt=""/></p></noscript>
-<!-- End Matomo Code -->
-
-<script defer src="https://bruce.wikipedia.de/banners/wikipedia.de-banners/stats.js"></script>
-<?php
-// Allow specifying a specific banner (instead of a random one) by checking for the "banner" URL parameter
-$randomBanner = 'your-contribution-to-free-knowledge.js';
-$rawUrlBanner = filter_input( INPUT_GET, 'banner', FILTER_UNSAFE_RAW );
-$filteredUrlBanner = basename( filter_input(
-	INPUT_GET,
-	'banner',
-	FILTER_SANITIZE_SPECIAL_CHARS,
-	FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK
-) );
-$urlBanner = ( $filteredUrlBanner && $rawUrlBanner === $filteredUrlBanner ) ? sprintf( 'banners/wikipedia.de-banners/%s.js', $filteredUrlBanner) : $randomBanner;
-?>
-<script data-banner-src="https://bruce.wikipedia.de/<?php echo $urlBanner; ?>" >
-    var bannerSrcTag = $('[data-banner-src]');
-    var bannerUrl = bannerSrcTag.data('banner-src');
-    var vWidthParam = "?vWidth=" + window.innerWidth;
-    bannerSrcTag.after('<script defer src="' + bannerUrl + vWidthParam + '"><\/script>');
-
-	if( $( '#WMDE-Banner-Container' ).is( ':empty' ) ) {
-		document.getElementById( 'txtSearch' ).focus();
-	}
-</script>
 </body>
 </html>
