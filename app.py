@@ -2,9 +2,13 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from flask import redirect
+import flask_babel
+from flask_babel import Babel
+from flask_babel import _
 import requests
 
 app = Flask(__name__)
+babel = Babel(app)
 
 @app.route("/")
 def start():
