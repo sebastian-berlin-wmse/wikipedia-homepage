@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0" />
-    <title>Wikipedia, die freie Enzyklop&auml;die</title>
+    <title>{{ _('Wikipedia, the free encyclopedia') }}</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/wikipedia.png') }}" />
     <link rel="stylesheet" media="screen" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
@@ -17,7 +17,7 @@
     <div id="main">
         <div id="mainbox">
             <div class="wikipedia-logo">
-                <a href="https://{{ lang }}.wikipedia.org/"><img src="{{ url_for('static', filename='images/Wikipedia-logo-v2-de.svg') }}" title="Hauptseite der Wikipedia" alt="Wikipedia - Die freie Enzyklopädie"/></a>
+                <a href="https://{{ lang }}.wikipedia.org/"><img src="{{ url_for('static', filename='images/Wikipedia-logo-v2-de.svg') }}" title="{{ _('Wikipedia\'s main page') }}" alt="{{ _('Wikipedia - the free encyclopedia') }}"/></a>
             </div>
             <div id="maincontent">
                 <div id="form">
