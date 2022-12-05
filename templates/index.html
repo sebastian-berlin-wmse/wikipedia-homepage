@@ -44,38 +44,43 @@
             </div>
             <div id="wmde-banner-featurebox"></div>
         </div>
-        <footer class="page-footer" id="donationfooter">
-            <div class="link-block">
+        <footer>
+            {% if footer.logo or footer.text %}
+            <div id="footer-logo">
+                {% if footer.logo %}
+                {% if footer.logo.url %}<a href="{{ footer.logo.url }}">{% endif %}
+                    <img class="wikimedia-logo" src="{{ url_for('static', filename='images/footer-logo.svg') }}" alt="{{ footer.logo.alt }}">
+                    {% if footer.logo.url %}</a>{% endif %}
+                {% endif %}
+                {% if footer.text %}<p id="logo-description">{{ footer.text }}</p>{% endif %}
+            </div>
+            {% endif %}
+            {% for category in link_categories %}
+            <div>
+                <h2>{{ category.header }}</h2>
                 <ul>
-                    {% if footer.logo or footer.text %}
-                    <li id="footer-logo">
-                        {% if footer.logo %}
-                        {% if footer.logo.url %}<a href="{{ footer.logo.url }}">{% endif %}
-                            <img class="wikimedia-logo" src="{{ url_for('static', filename='images/footer-logo.svg') }}" alt="{{ footer.logo.alt }}">
-                            {% if footer.logo.url %}</a>{% endif %}
-                        {% endif %}
-                        {% if footer.text %}<p id="logo-description">{{ footer.text }}</p>{% endif %}
-                    </li>
-                    {% endif %}
-                    <li>
-                        <p><strong>Wikimedia Deutschland e. V.</strong></p>
-                        <p><a href="https://www.wikimedia.de/de/ueber-uns">Über uns</a></p>
-                        <p><a href="https://www.wikimedia.de/datenschutz">Datenschutz</a></p>
-                        <p><a href="https://www.wikimedia.de/de/impressum">Impressum & Kontakt</a></p>
-                    </li>
-                    <li>
-                        <p><strong>Mitwirken</strong></p>
-                        <p><a href="https://spenden.wikimedia.de/apply-for-membership?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Mitglied werden</a></p>
-                        <p><a href="https://spenden.wikimedia.de/?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Jetzt spenden</a></p>
-                        <p><a href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Mittelverwendung</a></p>
-                    </li>
-                    <li>
-                        <p><strong>Vereinskanäle</strong></p>
-                        <p><a href="https://blog.wikimedia.de/">Unser Blog</a></p>
-                        <p><a href="https://www.facebook.com/WikimediaDE/">Facebook</a></p>
-                        <p><a href="https://twitter.com/wikimediade">Twitter</a></p>
-                    </li>
+                    {% for link in category.links %}
+                    <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+                    {% endfor %}
                 </ul>
+            </div>
+            {% endfor %}
+            <!--     <p><strong>Wikimedia Deutschland e. V.</strong></p> -->
+            <!--     <p><a href="https://www.wikimedia.de/de/ueber-uns">Über uns</a></p> -->
+            <!--     <p><a href="https://www.wikimedia.de/datenschutz">Datenschutz</a></p> -->
+            <!--     <p><a href="https://www.wikimedia.de/de/impressum">Impressum & Kontakt</a></p> -->
+            <!-- </div> -->
+            <!-- <div> -->
+            <!--     <p><strong>Mitwirken</strong></p> -->
+            <!--     <p><a href="https://spenden.wikimedia.de/apply-for-membership?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Mitglied werden</a></p> -->
+            <!--     <p><a href="https://spenden.wikimedia.de/?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Jetzt spenden</a></p> -->
+            <!--     <p><a href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Mittelverwendung</a></p> -->
+            <!-- </div> -->
+            <!-- <div> -->
+            <!--     <p><strong>Vereinskanäle</strong></p> -->
+            <!--     <p><a href="https://blog.wikimedia.de/">Unser Blog</a></p> -->
+            <!--     <p><a href="https://www.facebook.com/WikimediaDE/">Facebook</a></p> -->
+            <!--     <p><a href="https://twitter.com/wikimediade">Twitter</a></p> -->
             </div>
             {{ _('Images:') }}
             {{ wikipedia_logo_attribution|safe }}

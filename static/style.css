@@ -42,6 +42,9 @@ a:hover, a:active {
 	color: #373737;
 }
 
+a {
+	text-decoration: none;
+}
 p {
 	margin:0;
 	padding:0;
@@ -314,38 +317,35 @@ p {
 	background-size: 25px auto;
 	background-position: center;
 }
-#footer {
-	margin-top:5em;
-	font-size:9pt;
-	color:#333;
-}
 #advanced_search {
 	padding: 0.7em 0 0;
 }
 
-#donationfooter {
+footer {
 	background-color: #202520;
 	border-top: 1px solid #dddddd;
-	padding: 1em;
+	padding-top: 2em;
 	font-size: 9pt;
 	color: #ffffff;
 	bottom: 0;
 	max-width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-#donationfooter a {
+footer > a,
+footer > div {
+    margin: 0 2em;
+}
+
+footer a {
 	color: #fff;
-}
-
-#logo-description {
-    font-size: large;
-    font-family: serif;
-    font-style: italic;
 }
 
 .link-block ul {
 	padding: 0;
 	margin: 0 auto;
+	width: 90%;
 	list-style: none;
 	display: -webkit-flex;
 	display: -ms-flexbox;
