@@ -1,0 +1,6 @@
+---
+search_languages:
+    # Add links for languages to search in. Format: "code: label",
+    # e.g:
+    # en: English
+...
