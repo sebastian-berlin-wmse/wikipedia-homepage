@@ -30,7 +30,3 @@ msgstr "Wikipedias huvudsida"
 msgid "Wikipedia - the free encyclopedia"
 msgstr "Wikipedia - den fria encyklopedin"
 
-#: templates/index.html:29
-msgid "More languages"
-msgstr "Fler språk"
-

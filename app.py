@@ -6,26 +6,13 @@ import flask_babel
 from flask_babel import Babel
 from flask_babel import _
 import requests
-import yaml
 
 app = Flask(__name__)
 babel = Babel(app)
-language = "sv"
 
 @app.route("/")
-@app.route("/<search_language>")
-def start(search_language=None):
-    if not search_language:
-        search_language = "sv"
-    with open("config.yaml") as config_file:
-        config = yaml.safe_load(config_file)
-    print(config["search_languages"].items())
-    return render_template(
-        "index.html",
-        lang=language,
-        search_languages=config["search_languages"],
-        search_language=search_language
-    )
+def start():
+    return render_template("index.html", lang="sv")
 
 @app.route("/suggest")
 def suggest():
