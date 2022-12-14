@@ -37,3 +37,7 @@ def go():
     query = request.args.get("q")
     url = f"http://{language}.wikipedia.org/wiki/{query}"
     return redirect(url)
+
+@babel.localeselector
+def get_locale():
+    return "sv"
