@@ -42,9 +42,6 @@ a:hover, a:active {
 	color: #373737;
 }
 
-a {
-	text-decoration: none;
-}
 p {
 	margin:0;
 	padding:0;
@@ -239,6 +236,22 @@ p {
 	margin:0;
 	padding:0;
 }
+
+.search-languages {
+    margin-bottom: 5px;
+}
+
+.search-languages a {
+    padding: 2px;
+}
+
+.search-languages .current {
+    background: #575757;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
 .search-form input {
 	border-radius: 2px 0 0 2px;
 	box-sizing: border-box;
