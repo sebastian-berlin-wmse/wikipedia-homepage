@@ -21,9 +21,17 @@
             </div>
             <div id="maincontent">
                 <div id="form">
+                    {% if search_languages -%}
+                    <div class="search-languages">
+                        {% for code, language in search_languages.items() -%}
+                        <a href="{{ url_for('start') + code }}" {% if code == search_language %}class="current"{% endif %}>{{ language }}</a> •
+                        {% endfor %}
+                        <a href="https://wikipedia.org/" >{{ _('More languages') }}</a>
+                    </div>
+                    {%- endif %}
                     <form id="frmSearch" class="search-form" action="go" method="get" accept-charset="UTF-8">
-                        <input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="triggerSuggestLater('{{ lang }}')" autocomplete="off" />
-                        <input type="hidden" name="l" value="{{ lang }}" />
+                        <input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="triggerSuggestLater('{{ search_language }}')" autocomplete="off" />
+                        <input type="hidden" name="l" value="{{ search_language }}" />
                         <button type="submit" id="cmdSearch" class="button-ooui-like" name="b"><span class="search-icon"></span></button>
                     </form>
                 </div>
