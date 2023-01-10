@@ -1,6 +1,6 @@
 var ajaxCallTimeout = 5000;
 var suggestTimeout = null;
-var delay = 500;
+var delay = 100;
 var searchLang = "de";
 var lastSearch = "";
 var searchPath = 'go';
@@ -85,12 +85,3 @@ function handleSearchSuggest( searchResults ) {
 		);
 	}
 }
-
-$( document ).ready( function() {
-	$( 'body' ).on( 'mouseover', 'div.suggest_link', function() {
-		$( this ).addClass( 'suggest_link_over' );
-	} );
-	$( 'body' ).on( 'mouseout', 'div.suggest_link', function() {
-		$( this ).removeClass( 'suggest_link_over' );
-	} )
-} );

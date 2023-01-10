@@ -82,7 +82,7 @@ p {
 	font-size: 15px;
 	padding: 10px 20px 10px 10px;
 }
-.suggest_link_over .search_result {
+.suggest_link:hover .search_result {
 	color: #575757;
 	background-color: #f3f3f3;
 }
@@ -243,13 +243,12 @@ p {
 
 .search-languages a {
     padding: 2px;
+    color: #36c;
 }
 
 .search-languages .current {
-    background: #575757;
-    color: #fff;
-    border-radius: 4px;
     text-decoration: none;
+    color: #575757;
 }
 
 .search-form input {
