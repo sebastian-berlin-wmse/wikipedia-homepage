@@ -19,12 +19,17 @@ def start(search_language=None):
         search_language = "sv"
     with open("config.yaml") as config_file:
         config = yaml.safe_load(config_file)
-    print(config["search_languages"].items())
+    if "footer" in config:
+        footer = config["footer"]
+    else:
+        footer = None
     return render_template(
         "index.html",
         lang=language,
+        wikipedia_logo_attribution=config["wikipedia_logo_attribution"],
         search_languages=config["search_languages"],
-        search_language=search_language
+        search_language=search_language,
+        footer=footer
     )
 
 @app.route("/suggest")

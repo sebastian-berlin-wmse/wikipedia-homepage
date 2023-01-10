@@ -328,7 +328,7 @@ p {
 #donationfooter {
 	background-color: #202520;
 	border-top: 1px solid #dddddd;
-	padding-top: 2em;
+	padding: 1em;
 	font-size: 9pt;
 	color: #ffffff;
 	bottom: 0;
@@ -338,10 +338,16 @@ p {
 #donationfooter a {
 	color: #fff;
 }
+
+#logo-description {
+    font-size: large;
+    font-family: serif;
+    font-style: italic;
+}
+
 .link-block ul {
 	padding: 0;
 	margin: 0 auto;
-	width: 90%;
 	list-style: none;
 	display: -webkit-flex;
 	display: -ms-flexbox;
@@ -372,8 +378,12 @@ p {
 	height: 250px;
 }
 
+#footer-logo {
+    width: 300px;
+}
+
 .wikimedia-logo {
-	height: 50px;
+	max-width: 300px;
 }
 
 @media (max-width: 900px) {
