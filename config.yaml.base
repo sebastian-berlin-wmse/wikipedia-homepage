@@ -1,6 +1,22 @@
 ---
+# HTML string that will be added to the attributions for the Wikipedia
+# logo.
+wikipedia_logo_attribution:
 search_languages:
     # Add links for languages to search in. Format: "code: label",
     # e.g:
     # en: English
+footer:
+    # Show logo file static/images/footer-logo.svg in the footer if
+    # any varibales are given, at least `alt` should be present.
+    logo:
+        # Alt text for the footer logo.
+        # alt:
+        # URL for the footer logo.
+        # url:
+        # HTML string that will be added to the attributions for the
+        # logo.
+        # attribution:
+    # Text that goes under the logo in the footer
+    # text:
 ...
