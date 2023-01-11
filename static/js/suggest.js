@@ -85,3 +85,21 @@ function handleSearchSuggest( searchResults ) {
 		);
 	}
 }
+
+$( '#txtSearch' ).on( 'focus', function() {
+    if( $( this ).val() ) {
+	    $( '#search_suggest' ).show();
+    }
+} );
+
+$( '#txtSearch' ).on( 'blur', function() {
+	$( '#search_suggest' ).hide();
+} );
+// $( document ).ready( function() {
+// 	$( 'body' ).on( 'mouseover', 'div.suggest_link', function() {
+// 		$( this ).addClass( 'suggest_link_over' );
+// 	} );
+// 	$( 'body' ).on( 'mouseout', 'div.suggest_link', function() {
+// 		$( this ).removeClass( 'suggest_link_over' );
+// 	} )
+// } );

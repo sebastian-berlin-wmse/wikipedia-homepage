@@ -9,7 +9,7 @@
     <link rel="stylesheet" media="screen" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.cookie.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/suggest.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/suggest.js') }}" defer></script>
 </head>
 
 <body>
@@ -30,7 +30,7 @@
                     </div>
                     {%- endif %}
                     <form id="frmSearch" class="search-form" action="go" method="get" accept-charset="UTF-8">
-                        <input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="triggerSuggestLater('{{ search_language }}')" autocomplete="off" autofocus />
+                        <input type="text" id="txtSearch" name="q" alt="Search Criteria" onkeyup="triggerSuggestLater('{{ search_language }}')" autocomplete="off" placeholder="{{ _('Search Wikipedia') }}" autofocus />
                         <input type="hidden" name="l" value="{{ search_language }}" />
                         <button type="submit" id="cmdSearch" class="button-ooui-like" name="b"><span class="search-icon"></span></button>
                     </form>
