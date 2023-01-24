@@ -26,7 +26,7 @@ function searchSuggest( lang ) {
 				search: str
 			},
 			success: function( response ) {
-				handleSearchSuggest( response )
+				handleSearchSuggest( str, response )
 			},
 			timeout: ajaxCallTimeout
 		} );
@@ -34,7 +34,7 @@ function searchSuggest( lang ) {
 }
 
 function hideSuggest() {
-	$( '#search_suggest' ).hide();
+	$( '#search-suggestion-list' ).hide();
 	lastSearch = "";
 }
 
@@ -52,54 +52,49 @@ function getSearchLink( query, language, provider ) {
 	return searchPath + '?' + $.param( queryParams );
 }
 
-function handleSearchSuggest( searchResults ) {
+function handleSearchSuggest( term, suggestions ) {
+    console.log(suggestions);
 	var searchString = lastSearch;
-	var ss = $( '#search_suggest' ).empty().show();
+    let $suggestions = $(".search-suggestion");
+    $suggestions.hide();
+    $("#search-suggestion-list").show();
+    $("#search-for").attr("href", getSearchLink( term, searchLang ));
+    $("#search-term").text(term);
 
-	$.each( searchResults, function( index, row ) {
-
-		var entry = row.split( "\t" );
-		ss.append(
-			$( '<div></div>' )
-				.addClass( 'suggest_link' )
-				.append( $( '<a></a>' ).attr( 'href', getSearchLink( entry[0], searchLang ) )
-					.append(
-						$( '<span></span>' )
-							.addClass( searchString.toLowerCase() === entry[0].toLowerCase() ? 'exact-match' : 'partial-match' )
-							.addClass( 'search_result' )
-							.text( entry[0] )
-					)
-				)
-		);
-	} );
-
-	if( searchResults.length === 0 ) {
-		ss.append(
-			$( '<div></div>' )
-				.addClass( 'suggest_link' )
-				.append(
-					$( '<span></span>' )
-						.addClass( 'search_result' )
-						.text( 'Es wurden keine Artikel gefunden.' )
-				)
-		);
+    let i = 0;
+    for(let suggestion of suggestions) {
+        let $element = $suggestions.eq(i);
+        let $link = $element.find("a");
+        $element
+            .text(suggestion)
+            .attr("href", getSearchLink( suggestion, searchLang ))
+            .show();
+        i ++;
 	}
 }
 
-$( '#txtSearch' ).on( 'focus', function() {
-    if( $( this ).val() ) {
-	    $( '#search_suggest' ).show();
+} );
+
+$( '#search-suggestion-list' ).on( 'keydown', function(event) {
+    console.log("knapp:", this, document.activeElement);
+    if(event.key === "ArrowDown") {
+        $(document.activeElement).next().focus();
+        event.preventDefault();
+    } else if(event.key === "ArrowUp") {
+        let newFocus;
+        if($(document.activeElement).index() === 0) {
+            newFocus = $("#txtSearch");
+        } else {
+            newFocus = $(document.activeElement).prev();
+        }
+        newFocus.focus();
+        event.preventDefault();
     }
 } );
 
-$( '#txtSearch' ).on( 'blur', function() {
-	$( '#search_suggest' ).hide();
+$( '#frmSearch' ).on( 'keydown', function(event) {
+    if(event.key === "ArrowDown") {
+        $(".search-suggestion").eq(0).focus();
+        event.preventDefault();
+    }
 } );
-// $( document ).ready( function() {
-// 	$( 'body' ).on( 'mouseover', 'div.suggest_link', function() {
-// 		$( this ).addClass( 'suggest_link_over' );
-// 	} );
-// 	$( 'body' ).on( 'mouseout', 'div.suggest_link', function() {
-// 		$( this ).removeClass( 'suggest_link_over' );
-// 	} )
-// } );

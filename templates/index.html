@@ -35,7 +35,12 @@
                         <button type="submit" id="cmdSearch" class="button-ooui-like" name="b"><span class="search-icon"></span></button>
                     </form>
                 </div>
-                <div id="search_suggest"></div>
+                <div id="search-suggestion-list">
+                    {% for _ in range(10) %}
+                    <a class="search-suggestion"></a>
+                    {% endfor %}
+                    <a id="search-for" class="search-suggestion">{{ _('Search for') }} <span id="search-term"></span></a>
+                </div>
             </div>
             <div id="wmde-banner-featurebox"></div>
         </div>
