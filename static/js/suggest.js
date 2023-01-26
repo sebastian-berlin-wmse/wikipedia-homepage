@@ -95,11 +95,36 @@ $( '#frmSearch' ).on( 'keydown', function(event) {
     }
 } );
 
-$( 'body' ).click( (e) => {
-    console.log(e.target);
-    if(e.target.matches( '.search-item, #txtSearch' ) ) {
+// let focusLost = false;
+
+// $( '#txtSearch' ).on( 'focusout', (e) => {
+//     console.log("focusout:", e.target, "=>", e.relatedTarget);
+//     focusLost = true;
+// } );
+
+// $( 'body' ).on( 'focusin', (e) => {
+//     console.log("focusin:", e.target);
+//     if(focusLost) {
+// 	    $( '#search-suggestion-list' ).hide();
+//     }
+//     focusLost = false;
+// } );
+
+// $( 'body' ).on( 'focus', (e) => {
+//     console.log("focus:", e.target);
+// } );
+
+let searchControls = "#txtSearch, #cmdSearch, .search-item";
+
+$( searchControls ).on( 'focus', (e) => {
+    if(lastSearch) {
         $( '#search-suggestion-list' ).show();
-        return;
     }
-    $( '#search-suggestion-list' ).hide();
+} );
+
+$( searchControls ).on( 'blur', (e) => {
+    // console.log(e);
+    if(e.relatedTarget === null || !e.relatedTarget.matches(searchControls)) {
+        $( '#search-suggestion-list' ).hide();
+    }
 } );
