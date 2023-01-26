@@ -73,7 +73,7 @@ p {
 .search-suggestion .exact-match {
 	font-weight: bold;
 }
-.search-suggestion {
+.search-item {
 	box-sizing: border-box;
 	width: 100%;
 	display: inline-block;
@@ -82,8 +82,8 @@ p {
 	font-size: 15px;
 	padding: 10px 20px 10px 10px;
 }
-.search-suggestion:hover,
-.search-suggestion:focus {
+.search-item:hover,
+.search-item:focus {
 	color: #575757;
 	background-color: #f3f3f3;
 }
@@ -106,6 +106,10 @@ p {
 	#search-suggestion-list {
 		width: calc(100% - 42px);
 	}
+}
+
+#search-term {
+    font-weight: bold;
 }
 
 #head p {

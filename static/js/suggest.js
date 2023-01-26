@@ -53,7 +53,6 @@ function getSearchLink( query, language, provider ) {
 }
 
 function handleSearchSuggest( term, suggestions ) {
-    console.log(suggestions);
 	var searchString = lastSearch;
     let $suggestions = $(".search-suggestion");
     $suggestions.hide();
@@ -71,12 +70,9 @@ function handleSearchSuggest( term, suggestions ) {
             .show();
         i ++;
 	}
-}
-
-} );
+};
 
 $( '#search-suggestion-list' ).on( 'keydown', function(event) {
-    console.log("knapp:", this, document.activeElement);
     if(event.key === "ArrowDown") {
         $(document.activeElement).next().focus();
         event.preventDefault();
@@ -97,4 +93,13 @@ $( '#frmSearch' ).on( 'keydown', function(event) {
         $(".search-suggestion").eq(0).focus();
         event.preventDefault();
     }
+} );
+
+$( 'body' ).click( (e) => {
+    console.log(e.target);
+    if(e.target.matches( '.search-item, #txtSearch' ) ) {
+        $( '#search-suggestion-list' ).show();
+        return;
+    }
+    $( '#search-suggestion-list' ).hide();
 } );
