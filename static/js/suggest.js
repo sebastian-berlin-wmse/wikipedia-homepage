@@ -1,6 +1,6 @@
 var ajaxCallTimeout = 5000;
 var suggestTimeout = null;
-var delay = 100;
+var delay = 500;
 var searchLang = "de";
 var lastSearch = "";
 var searchPath = 'go';
@@ -18,7 +18,7 @@ function searchSuggest( lang ) {
 	lastSearch = str;
 
 	if ( str == "" ) {
-		hideSuggest();
+		$( '#search-suggestion-list' ).hide();
 	} else {
 		$.ajax( 'suggest', {
 			data: {
@@ -31,11 +31,6 @@ function searchSuggest( lang ) {
 			timeout: ajaxCallTimeout
 		} );
 	}
-}
-
-function hideSuggest() {
-	$( '#search-suggestion-list' ).hide();
-	lastSearch = "";
 }
 
 function getSearchLink( query, language, provider ) {
@@ -95,25 +90,6 @@ $( '#frmSearch' ).on( 'keydown', function(event) {
     }
 } );
 
-// let focusLost = false;
-
-// $( '#txtSearch' ).on( 'focusout', (e) => {
-//     console.log("focusout:", e.target, "=>", e.relatedTarget);
-//     focusLost = true;
-// } );
-
-// $( 'body' ).on( 'focusin', (e) => {
-//     console.log("focusin:", e.target);
-//     if(focusLost) {
-// 	    $( '#search-suggestion-list' ).hide();
-//     }
-//     focusLost = false;
-// } );
-
-// $( 'body' ).on( 'focus', (e) => {
-//     console.log("focus:", e.target);
-// } );
-
 let searchControls = "#txtSearch, #cmdSearch, .search-item";
 
 $( searchControls ).on( 'focus', (e) => {
@@ -123,7 +99,6 @@ $( searchControls ).on( 'focus', (e) => {
 } );
 
 $( searchControls ).on( 'blur', (e) => {
-    // console.log(e);
     if(e.relatedTarget === null || !e.relatedTarget.matches(searchControls)) {
         $( '#search-suggestion-list' ).hide();
     }
