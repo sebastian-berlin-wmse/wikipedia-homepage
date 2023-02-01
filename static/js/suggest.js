@@ -54,62 +54,62 @@ function getSearchLink( query, language, provider ) {
 }
 
 function handleSearchSuggest( term, suggestions ) {
-    $suggestions.hide();
-    $searchSuggestionList.show();
-    $searchFor.attr( "href", getSearchLink( term, searchLang ) );
-    $searchTerm.text( term );
+	$suggestions.hide();
+	$searchSuggestionList.show();
+	$searchFor.attr( "href", getSearchLink( term, searchLang ) );
+	$searchTerm.text( term );
 
 	var i = 0;
-    for ( var suggestion of suggestions ) {
-        var $element = $suggestions.eq(i);
-        $element.text( suggestion );
-        $element.attr( "href", getSearchLink( suggestion, searchLang ) )
-        console.log(suggestion, term);
-        if ( suggestion.toLowerCase() === term.toLowerCase() ) {
-            $element.addClass( "exact-match" );
-        } else {
-            $element.removeClass( "exact-match" );
-        }
-        $element.show();
+	for ( var suggestion of suggestions ) {
+		var $element = $suggestions.eq(i);
+		$element.text( suggestion );
+		$element.attr( "href", getSearchLink( suggestion, searchLang ) )
+		console.log(suggestion, term);
+		if ( suggestion.toLowerCase() === term.toLowerCase() ) {
+			$element.addClass( "exact-match" );
+		} else {
+			$element.removeClass( "exact-match" );
+		}
+		$element.show();
 		i ++;
 	}
 };
 
 // Navigate the search suggestions with the arrow keys.
 $searchSuggestionList.on( "keydown", function( event ) {
-    if ( event.key === "ArrowDown" ) {
-        $( document.activeElement ).next().focus();
-        event.preventDefault();
-    } else if ( event.key === "ArrowUp" ) {
-        var newFocus;
-        if ( $( document.activeElement ).index() === 0 ) {
-            newFocus = $searchField;
-        } else {
-            newFocus = $( document.activeElement ).prev();
-        }
-        newFocus.focus();
-        event.preventDefault();
-    }
+	if ( event.key === "ArrowDown" ) {
+		$( document.activeElement ).next().focus();
+		event.preventDefault();
+	} else if ( event.key === "ArrowUp" ) {
+		var newFocus;
+		if ( $( document.activeElement ).index() === 0 ) {
+			newFocus = $searchField;
+		} else {
+			newFocus = $( document.activeElement ).prev();
+		}
+		newFocus.focus();
+		event.preventDefault();
+	}
 } );
 
 $( "#frmSearch" ).on( "keydown", function( event ) {
-    if ( event.key === "ArrowDown" ) {
-        $suggestions.eq( 0 ).focus();
-        event.preventDefault();
-    }
+	if ( event.key === "ArrowDown" ) {
+		$suggestions.eq( 0 ).focus();
+		event.preventDefault();
+	}
 } );
 
 // Hide suggestion list when none of the search controls (search
 // field, button or suggestion list) are in focus.
 var searchControls = "#txtSearch, #cmdSearch, .search-item";
 $( searchControls ).on( "focus", function() {
-    if( lastSearch ) {
-        $searchSuggestionList.show();
-    }
+	if( lastSearch ) {
+		$searchSuggestionList.show();
+	}
 } );
 
 $( searchControls ).on( "blur", function( event ) {
-    if( event.relatedTarget === null || !event.relatedTarget.matches( searchControls ) ) {
-        $searchSuggestionList.hide();
-    }
+	if( event.relatedTarget === null || !event.relatedTarget.matches( searchControls ) ) {
+		$searchSuggestionList.hide();
+	}
 } );
