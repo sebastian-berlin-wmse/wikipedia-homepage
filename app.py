@@ -23,23 +23,23 @@ def start(search_language=None):
         footer = config["footer"]
     else:
         footer = None
-    link_categories = [
-        {
-            "header": "Wikimedia Sverige",
-            "links": [
-                {"label": "Hemsida", "url": "https://wikimedia.se"},
-                {"label": "Om oss", "url": "https://wikimedia.se/om-oss/"}
-            ]
-        }
-    ]
+    print(config["footer"]["links"])
+    # link_categories = [
+    #     {
+    #         "header": "Wikimedia Sverige",
+    #         "links": [
+    #             {"label": "Hemsida", "url": "https://wikimedia.se"},
+    #             {"label": "Om oss", "url": "https://wikimedia.se/om-oss/"}
+    #         ]
+    #     }
+    # ]
     return render_template(
         "index.html",
         lang=language,
         wikipedia_logo_attribution=config["wikipedia_logo_attribution"],
         search_languages=config["search_languages"],
         search_language=search_language,
-        footer=footer,
-        link_categories=link_categories
+        footer=footer
     )
 
 @app.route("/suggest")
