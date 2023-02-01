@@ -5,6 +5,12 @@ var searchLang = "de";
 var lastSearch = "";
 var searchPath = 'go';
 
+var $searchField = $( "#txtSearch" );
+var $suggestions = $( ".search-suggestion" );
+var $searchSuggestionList = $( "#search-suggestion-list" );
+var $searchTerm = $( "#search-term" );
+var $searchFor = $( "#search-for" );
+
 function triggerSuggestLater( lang ) {
 	if ( suggestTimeout ) clearTimeout( suggestTimeout ); //kill suggestion timer
 	suggestTimeout = setTimeout( "searchSuggest('" + lang + "')", delay );
@@ -12,13 +18,13 @@ function triggerSuggestLater( lang ) {
 
 function searchSuggest( lang ) {
 	searchLang = lang;
-	var str = $( '#txtSearch' ).val();
+	var str = $searchField.val();
 
 	if ( str == lastSearch ) return;
 	lastSearch = str;
 
 	if ( str == "" ) {
-		$( '#search-suggestion-list' ).hide();
+		$searchSuggestionList.hide();
 	} else {
 		$.ajax( 'suggest', {
 			data: {
@@ -48,58 +54,62 @@ function getSearchLink( query, language, provider ) {
 }
 
 function handleSearchSuggest( term, suggestions ) {
-	var searchString = lastSearch;
-    let $suggestions = $(".search-suggestion");
     $suggestions.hide();
-    $("#search-suggestion-list").show();
-    $("#search-for").attr("href", getSearchLink( term, searchLang ));
-    $("#search-term").text(term);
+    $searchSuggestionList.show();
+    $searchFor.attr( "href", getSearchLink( term, searchLang ) );
+    $searchTerm.text( term );
 
-    let i = 0;
-    for(let suggestion of suggestions) {
-        let $element = $suggestions.eq(i);
-        let $link = $element.find("a");
-        $element
-            .text(suggestion)
-            .attr("href", getSearchLink( suggestion, searchLang ))
-            .show();
-        i ++;
+	var i = 0;
+    for ( var suggestion of suggestions ) {
+        var $element = $suggestions.eq(i);
+        $element.text( suggestion );
+        $element.attr( "href", getSearchLink( suggestion, searchLang ) )
+        console.log(suggestion, term);
+        if ( suggestion.toLowerCase() === term.toLowerCase() ) {
+            $element.addClass( "exact-match" );
+        } else {
+            $element.removeClass( "exact-match" );
+        }
+        $element.show();
+		i ++;
 	}
 };
 
-$( '#search-suggestion-list' ).on( 'keydown', function(event) {
-    if(event.key === "ArrowDown") {
-        $(document.activeElement).next().focus();
+// Navigate the search suggestions with the arrow keys.
+$searchSuggestionList.on( "keydown", function( event ) {
+    if ( event.key === "ArrowDown" ) {
+        $( document.activeElement ).next().focus();
         event.preventDefault();
-    } else if(event.key === "ArrowUp") {
-        let newFocus;
-        if($(document.activeElement).index() === 0) {
-            newFocus = $("#txtSearch");
+    } else if ( event.key === "ArrowUp" ) {
+        var newFocus;
+        if ( $( document.activeElement ).index() === 0 ) {
+            newFocus = $searchField;
         } else {
-            newFocus = $(document.activeElement).prev();
+            newFocus = $( document.activeElement ).prev();
         }
         newFocus.focus();
         event.preventDefault();
     }
 } );
 
-$( '#frmSearch' ).on( 'keydown', function(event) {
-    if(event.key === "ArrowDown") {
-        $(".search-suggestion").eq(0).focus();
+$( "#frmSearch" ).on( "keydown", function( event ) {
+    if ( event.key === "ArrowDown" ) {
+        $suggestions.eq( 0 ).focus();
         event.preventDefault();
     }
 } );
 
-let searchControls = "#txtSearch, #cmdSearch, .search-item";
-
-$( searchControls ).on( 'focus', (e) => {
-    if(lastSearch) {
-        $( '#search-suggestion-list' ).show();
+// Hide suggestion list when none of the search controls (search
+// field, button or suggestion list) are in focus.
+var searchControls = "#txtSearch, #cmdSearch, .search-item";
+$( searchControls ).on( "focus", function() {
+    if( lastSearch ) {
+        $searchSuggestionList.show();
     }
 } );
 
-$( searchControls ).on( 'blur', (e) => {
-    if(e.relatedTarget === null || !e.relatedTarget.matches(searchControls)) {
-        $( '#search-suggestion-list' ).hide();
+$( searchControls ).on( "blur", function( event ) {
+    if( event.relatedTarget === null || !event.relatedTarget.matches( searchControls ) ) {
+        $searchSuggestionList.hide();
     }
 } );

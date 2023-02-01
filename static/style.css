@@ -64,7 +64,7 @@ p {
 	border: 0 none;
 	margin-right: 0.8em;
 }
-.search-suggestion .exact-match {
+.exact-match {
 	font-weight: bold;
 }
 .search-item {
@@ -103,7 +103,7 @@ p {
 }
 
 #search-term {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 #head p {
