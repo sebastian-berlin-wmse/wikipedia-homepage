@@ -1,14 +1,14 @@
-# Translations template for PROJECT.
-# Copyright (C) 2022 ORGANIZATION
-# This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+# Translations template for Wikipedia homepage.
+# Copyright (C) 2023 Wikimedia Sverige
+# This file is distributed under the same license as the Wikipedia homepage project.
+# Sebastian Berlin <sebastian.berlin@wikimedia.se>, 2023.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-12-16 14:55+0100\n"
+"POT-Creation-Date: 2023-02-01 15:09+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,15 @@ msgstr ""
 msgid "More languages"
 msgstr ""
 
-#: templates/index.html:75
+#: templates/index.html:33
+msgid "Search Wikipedia"
+msgstr ""
+
+#: templates/index.html:42
+msgid "Search for"
+msgstr ""
+
+#: templates/index.html:80
 msgid "Images:"
 msgstr ""
 
