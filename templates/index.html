@@ -45,33 +45,33 @@
             <div id="wmde-banner-featurebox"></div>
         </div>
         <footer>
-                {% if footer.logo or footer.text %}
-                <div id="footer-logo">
-                    {% if footer.logo %}
-                    {% if footer.logo.url %}<a href="{{ footer.logo.url }}">{% endif %}
-                        <img class="wikimedia-logo" src="{{ url_for('static', filename='images/footer-logo.svg') }}" alt="{{ footer.logo.alt }}">
-                        {% if footer.logo.url %}</a>{% endif %}
-                    {% endif %}
-                    {% if footer.text %}<p id="logo-description">{{ footer.text }}</p>{% endif %}
-                </div>
-                {% endif %}
-                {% for header, links in footer.links.items() %}
-                <div>
-                    <h2>{{ header }}</h2>
+            <div id="footer-content">
+                {% for block in footer %}
+                <div {% if block.block_type == "logo" %}class="wide"{% endif %}>
+                    {% if block.block_type == "logo" %}
+                    {% if block.url %}<a href="{{ block.url }}">{% endif %}
+                        <img class="wikimedia-logo" src="{{ url_for('static', filename='images/' + block.image) }}" alt="{{ block.alt }}">
+                        {% if block.url %}</a>{% endif %}
+                    {% if block.text %}<p id="logo-description">{{ block.text }}</p>{% endif %}
+                    {% elif block.block_type == "links" %}
+                    {% if block.header %}<h2>{{ block.header }}</h2>{% endif %}
                     <ul class="footer-link-list">
-                        {% for label, url in links.items() %}
+                        {% for label, url in block.links.items() %}
                         <li><a href="{{ url }}">{{ label }}</a></li>
                         {% endfor %}
                     </ul>
+                    {% endif %}
                 </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
             <div>
-            {{ _('Images:') }}
-            {{ wikipedia_logo_attribution|safe }}
-            {%- if footer.logo and footer.logo.attribution -%}
-            ; {{ footer.logo.attribution|safe }}
-            {%- endif %}
-            <div>
+                {{ _('Images:') }}
+                {{ wikipedia_logo_attribution|safe }}
+                {%- for block in footer -%}
+                {%- if block.attribution -%}; {{ block.attribution|safe }}
+                {%- endif -%}
+                {% endfor %}
+            </div>
         </footer>
     </div>
 </body>

@@ -23,7 +23,9 @@ def start(search_language=None):
         footer = config["footer"]
     else:
         footer = None
-    print(config["footer"]["links"])
+
+    import pprint
+    pprint.pprint(config["footer"])
     # link_categories = [
     #     {
     #         "header": "Wikimedia Sverige",
