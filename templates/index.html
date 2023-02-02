@@ -47,10 +47,10 @@
         <footer>
             <div id="footer-content">
                 {% for block in footer %}
-                <div {% if block.block_type == "logo" %}class="wide"{% endif %}>
+                <div>
                     {% if block.block_type == "logo" %}
                     {% if block.url %}<a href="{{ block.url }}">{% endif %}
-                        <img class="wikimedia-logo" src="{{ url_for('static', filename='images/' + block.image) }}" alt="{{ block.alt }}">
+                        <img class="footer-logo" src="{{ url_for('static', filename='images/' + block.image) }}" alt="{{ block.alt }}">
                         {% if block.url %}</a>{% endif %}
                     {% if block.text %}<p id="logo-description">{{ block.text }}</p>{% endif %}
                     {% elif block.block_type == "links" %}
@@ -64,7 +64,7 @@
                 </div>
                 {% endfor %}
             </div>
-            <div>
+            <div id="attributions">
                 {{ _('Images:') }}
                 {{ wikipedia_logo_attribution|safe }}
                 {%- for block in footer -%}
