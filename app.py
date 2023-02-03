@@ -41,7 +41,7 @@ def suggest():
         "action": "query",
         "list": "allpages",
         "apnamespace": 0,
-        "aplimit": 20,
+        "aplimit": 10,
         "apprefix": search,
         "format": "json"
     }
