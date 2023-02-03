@@ -44,44 +44,34 @@
             </div>
             <div id="wmde-banner-featurebox"></div>
         </div>
-        <footer class="page-footer" id="donationfooter">
-            <div class="link-block">
-                <ul>
-                    {% if footer.logo or footer.text %}
-                    <li id="footer-logo">
-                        {% if footer.logo %}
-                        {% if footer.logo.url %}<a href="{{ footer.logo.url }}">{% endif %}
-                            <img class="wikimedia-logo" src="{{ url_for('static', filename='images/footer-logo.svg') }}" alt="{{ footer.logo.alt }}">
-                            {% if footer.logo.url %}</a>{% endif %}
-                        {% endif %}
-                        {% if footer.text %}<p id="logo-description">{{ footer.text }}</p>{% endif %}
-                    </li>
+        <footer>
+            <div id="footer-content">
+                {% for block in footer %}
+                <div>
+                    {% if block.block_type == "logo" %}
+                    {% if block.url %}<a href="{{ block.url }}">{% endif %}
+                        <img class="footer-logo" src="{{ url_for('static', filename='images/' + block.image) }}" alt="{{ block.alt }}">
+                        {% if block.url %}</a>{% endif %}
+                    {% if block.text %}<p id="logo-description">{{ block.text }}</p>{% endif %}
+                    {% elif block.block_type == "links" %}
+                    {% if block.header %}<h2>{{ block.header }}</h2>{% endif %}
+                    <ul class="footer-link-list">
+                        {% for label, url in block.links.items() %}
+                        <li><a href="{{ url }}">{{ label }}</a></li>
+                        {% endfor %}
+                    </ul>
                     {% endif %}
-                    <li>
-                        <p><strong>Wikimedia Deutschland e. V.</strong></p>
-                        <p><a href="https://www.wikimedia.de/de/ueber-uns">Über uns</a></p>
-                        <p><a href="https://www.wikimedia.de/datenschutz">Datenschutz</a></p>
-                        <p><a href="https://www.wikimedia.de/de/impressum">Impressum & Kontakt</a></p>
-                    </li>
-                    <li>
-                        <p><strong>Mitwirken</strong></p>
-                        <p><a href="https://spenden.wikimedia.de/apply-for-membership?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Mitglied werden</a></p>
-                        <p><a href="https://spenden.wikimedia.de/?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Jetzt spenden</a></p>
-                        <p><a href="https://spenden.wikimedia.de/use-of-funds?piwik_campaign=wpdefooter&piwik_kwd=wpdefooterbtn">Mittelverwendung</a></p>
-                    </li>
-                    <li>
-                        <p><strong>Vereinskanäle</strong></p>
-                        <p><a href="https://blog.wikimedia.de/">Unser Blog</a></p>
-                        <p><a href="https://www.facebook.com/WikimediaDE/">Facebook</a></p>
-                        <p><a href="https://twitter.com/wikimediade">Twitter</a></p>
-                    </li>
-                </ul>
+                </div>
+                {% endfor %}
             </div>
-            {{ _('Images:') }}
-            {{ wikipedia_logo_attribution|safe }}
-            {%- if footer.logo and footer.logo.attribution -%}
-            ; {{ footer.logo.attribution|safe }}
-            {%- endif %}
+            <div id="attributions">
+                {{ _('Images:') }}
+                {{ wikipedia_logo_attribution|safe }}
+                {%- for block in footer -%}
+                {%- if block.attribution -%}; {{ block.attribution|safe }}
+                {%- endif -%}
+                {% endfor %}
+            </div>
         </footer>
     </div>
 </body>
