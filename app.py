@@ -22,19 +22,10 @@ def start(search_language=None):
     if "footer" in config:
         footer = config["footer"]
     else:
-        footer = None
+        # Empty list instead of None to make the template code a bit
+        # cleaner.
+        footer = []
 
-    import pprint
-    pprint.pprint(config["footer"])
-    # link_categories = [
-    #     {
-    #         "header": "Wikimedia Sverige",
-    #         "links": [
-    #             {"label": "Hemsida", "url": "https://wikimedia.se"},
-    #             {"label": "Om oss", "url": "https://wikimedia.se/om-oss/"}
-    #         ]
-    #     }
-    # ]
     return render_template(
         "index.html",
         lang=language,
