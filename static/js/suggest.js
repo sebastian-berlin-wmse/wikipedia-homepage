@@ -5,6 +5,12 @@ var searchLang = "de";
 var lastSearch = "";
 var searchPath = 'go';
 
+var $searchField = $( "#txtSearch" );
+var $suggestions = $( ".search-suggestion" );
+var $searchSuggestionList = $( "#search-suggestion-list" );
+var $searchTerm = $( "#search-term" );
+var $searchFor = $( "#search-for" );
+
 function triggerSuggestLater( lang ) {
 	if ( suggestTimeout ) clearTimeout( suggestTimeout ); //kill suggestion timer
 	suggestTimeout = setTimeout( "searchSuggest('" + lang + "')", delay );
@@ -12,13 +18,13 @@ function triggerSuggestLater( lang ) {
 
 function searchSuggest( lang ) {
 	searchLang = lang;
-	var str = $( '#txtSearch' ).val();
+	var str = $searchField.val();
 
 	if ( str == lastSearch ) return;
 	lastSearch = str;
 
 	if ( str == "" ) {
-		hideSuggest();
+		$searchSuggestionList.hide();
 	} else {
 		$.ajax( 'suggest', {
 			data: {
@@ -26,16 +32,11 @@ function searchSuggest( lang ) {
 				search: str
 			},
 			success: function( response ) {
-				handleSearchSuggest( response )
+				handleSearchSuggest( str, response )
 			},
 			timeout: ajaxCallTimeout
 		} );
 	}
-}
-
-function hideSuggest() {
-	$( '#search_suggest' ).hide();
-	lastSearch = "";
 }
 
 function getSearchLink( query, language, provider ) {
@@ -52,45 +53,63 @@ function getSearchLink( query, language, provider ) {
 	return searchPath + '?' + $.param( queryParams );
 }
 
-function handleSearchSuggest( searchResults ) {
-	var searchString = lastSearch;
-	var ss = $( '#search_suggest' ).empty().show();
+function handleSearchSuggest( term, suggestions ) {
+	$suggestions.hide();
+	$searchSuggestionList.show();
+	$searchFor.attr( "href", getSearchLink( term, searchLang ) );
+	$searchTerm.text( term );
 
-	$.each( searchResults, function( index, row ) {
-
-		var entry = row.split( "\t" );
-		ss.append(
-			$( '<div></div>' )
-				.addClass( 'suggest_link' )
-				.append( $( '<a></a>' ).attr( 'href', getSearchLink( entry[0], searchLang ) )
-					.append(
-						$( '<span></span>' )
-							.addClass( searchString.toLowerCase() === entry[0].toLowerCase() ? 'exact-match' : 'partial-match' )
-							.addClass( 'search_result' )
-							.text( entry[0] )
-					)
-				)
-		);
-	} );
-
-	if( searchResults.length === 0 ) {
-		ss.append(
-			$( '<div></div>' )
-				.addClass( 'suggest_link' )
-				.append(
-					$( '<span></span>' )
-						.addClass( 'search_result' )
-						.text( 'Es wurden keine Artikel gefunden.' )
-				)
-		);
+	var i = 0;
+	for ( var suggestion of suggestions ) {
+		var $element = $suggestions.eq(i);
+		$element.text( suggestion );
+		$element.attr( "href", getSearchLink( suggestion, searchLang ) )
+		console.log(suggestion, term);
+		if ( suggestion.toLowerCase() === term.toLowerCase() ) {
+			$element.addClass( "exact-match" );
+		} else {
+			$element.removeClass( "exact-match" );
+		}
+		$element.show();
+		i ++;
 	}
-}
+};
 
-$( document ).ready( function() {
-	$( 'body' ).on( 'mouseover', 'div.suggest_link', function() {
-		$( this ).addClass( 'suggest_link_over' );
-	} );
-	$( 'body' ).on( 'mouseout', 'div.suggest_link', function() {
-		$( this ).removeClass( 'suggest_link_over' );
-	} )
+// Navigate the search suggestions with the arrow keys.
+$searchSuggestionList.on( "keydown", function( event ) {
+	if ( event.key === "ArrowDown" ) {
+		$( document.activeElement ).next().focus();
+		event.preventDefault();
+	} else if ( event.key === "ArrowUp" ) {
+		var newFocus;
+		if ( $( document.activeElement ).index() === 0 ) {
+			newFocus = $searchField;
+		} else {
+			newFocus = $( document.activeElement ).prev();
+		}
+		newFocus.focus();
+		event.preventDefault();
+	}
+} );
+
+$( "#frmSearch" ).on( "keydown", function( event ) {
+	if ( event.key === "ArrowDown" ) {
+		$suggestions.eq( 0 ).focus();
+		event.preventDefault();
+	}
+} );
+
+// Hide suggestion list when none of the search controls (search
+// field, button or suggestion list) are in focus.
+var searchControls = "#txtSearch, #cmdSearch, .search-item";
+$( searchControls ).on( "focus", function() {
+	if( lastSearch ) {
+		$searchSuggestionList.show();
+	}
+} );
+
+$( searchControls ).on( "blur", function( event ) {
+	if( event.relatedTarget === null || !event.relatedTarget.matches( searchControls ) ) {
+		$searchSuggestionList.hide();
+	}
 } );
