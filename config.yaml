@@ -1,0 +1,34 @@
+---
+wikipedia_logo_attribution: 'Wikipedia-logga: <a href="https://commons.wikimedia.org/wiki/File:Wikipedia-logo-v2-sv.svg">Wikimedia Foundation</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons'
+search_languages:
+    sv: Svenska
+    ar: العربية
+    bs: Bosanski
+    da: Dansk
+    de: Deutsch
+    en: English
+    es: Español
+    fa: فارسی
+    fi: Suomi
+    ku: Kurdî/كوردی
+    "no": ‪Norsk
+    se: Sámegiella
+    sr: Српски/Srpski
+footer:
+    - block_type: logo
+      image: wikimedia-logo.svg
+      url: https://wikimedia.se
+      alt: Wikimedia Sverige
+      attribution: 'Wikimedia Sverige-logga: <a href="https://commons.wikimedia.org/wiki/File:Wikimedia_Sverige_logo_-_horizontal,_white.svg">André Costa</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons'
+      text: Wikimedia Sverige jobbar med fri kunskap på Wikipedia.
+    - block_type: links
+      header: Wikimedia Sverige
+      links:
+          Om oss: https://wikimedia.se/om-oss/
+          Bli medlem: http://medlem.wikimedia.se/
+          Integritetspolicy: https://wikimedia.se/integritetspolicy
+    - block_type: logo
+      image: 90-konto-logo.png
+      url: https://www.insamlingskontroll.se/90-konto-organisationer/
+      alt: 90-konto, svensk insamlingskontroll
+...
