@@ -22,7 +22,10 @@ def start(search_language=None):
     if "footer" in config:
         footer = config["footer"]
     else:
-        footer = None
+        # Empty list instead of None to make the template code a bit
+        # cleaner.
+        footer = []
+
     return render_template(
         "index.html",
         lang=language,

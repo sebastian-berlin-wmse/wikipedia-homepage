@@ -1,22 +1,28 @@
 ---
 # HTML string that will be added to the attributions for the Wikipedia
 # logo.
-wikipedia_logo_attribution:
+wikipedia_logo_attribution: ...
 search_languages:
-    # Add links for languages to search in. Format: "code: label",
-    # e.g:
-    # en: English
+    # Links for languages to search in.
+    code: Label
 footer:
-    # Show logo file static/images/footer-logo.svg in the footer if
-    # any varibales are given, at least `alt` should be present.
-    logo:
-        # Alt text for the footer logo.
-        # alt:
-        # URL for the footer logo.
-        # url:
-        # HTML string that will be added to the attributions for the
-        # logo.
-        # attribution:
-    # Text that goes under the logo in the footer
-    # text:
+    # Logos and links in the footer.
+  - block_type: logo
+    # Name of image in static/images/
+    image: ...
+    # Alt text for the footer logo.
+    alt: ...
+    # URL for the footer logo.
+    url: ...
+    # HTML string that will be added to the attributions for the
+    # logo.
+    attribution: ...
+    # Text that goes under the logo.
+    text: ...
+  - block_type: links
+    # Optional header.
+    header: ...
+    links:
+        # A number of links defined as:
+        Label: URL
 ...
