@@ -19,6 +19,7 @@ def start(search_language=None):
         search_language = "sv"
     with open("config.yaml") as config_file:
         config = yaml.safe_load(config_file)
+
     if "footer" in config:
         footer = config["footer"]
     else:
@@ -26,13 +27,20 @@ def start(search_language=None):
         # cleaner.
         footer = []
 
+    attributions = []
+    if "wikipedia_logo_attribution" in config:
+        attributions.append(config["wikipedia_logo_attribution"])
+    for block in footer:
+        if "attribution" in block:
+            attributions.append(block["attribution"])
+
     return render_template(
         "index.html",
         lang=language,
-        wikipedia_logo_attribution=config["wikipedia_logo_attribution"],
         search_languages=config["search_languages"],
         search_language=search_language,
-        footer=footer
+        footer=footer,
+        attributions=attributions
     )
 
 @app.route("/suggest")

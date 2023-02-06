@@ -64,14 +64,14 @@
                 </div>
                 {% endfor %}
             </div>
+            {% if attributions %}
             <div id="attributions">
                 {{ _('Images:') }}
-                {{ wikipedia_logo_attribution|safe }}
-                {%- for block in footer -%}
-                {%- if block.attribution -%}; {{ block.attribution|safe }}
-                {%- endif -%}
+                {%- for attribution in attributions -%}
+                {{ attribution|safe }}
                 {% endfor %}
             </div>
+            {%- endif -%}
         </footer>
     </div>
 </body>
