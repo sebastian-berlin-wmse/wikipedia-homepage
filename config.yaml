@@ -1,5 +1,4 @@
 ---
-wikipedia_logo_attribution: 'Wikipedia-logga: <a href="https://commons.wikimedia.org/wiki/File:Wikipedia-logo-v2-sv.svg">Wikimedia Foundation</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons'
 search_languages:
     sv: Svenska
     ar: العربية
@@ -19,7 +18,6 @@ footer:
       image: wikimedia-logo.svg
       url: https://wikimedia.se
       alt: Wikimedia Sverige
-      attribution: 'Wikimedia Sverige-logga: <a href="https://commons.wikimedia.org/wiki/File:Wikimedia_Sverige_logo_-_horizontal,_white.svg">André Costa</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>, via Wikimedia Commons'
       text: Wikimedia Sverige jobbar med fri kunskap på Wikipedia.
     - block_type: links
       header: Wikimedia Sverige
