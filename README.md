@@ -22,3 +22,15 @@ flask run
 ```
 
 Add `--debug` when developing to make your life easier.
+
+# Maintenance Scripts
+
+These scripts can help with setting up, but aren't used during
+runtime. They're located in the `maintenance` folder.
+
+## get_search_strings.py
+
+Generates the placeholder strings for the search field, e.g. "Search
+Wikipedia" for English, for each search language in the config. Each
+string is retrieved from the search field on that language version of
+Wikipedia.
