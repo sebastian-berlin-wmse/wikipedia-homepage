@@ -4,10 +4,12 @@
 wikipedia_logo_attribution: ...
 search_languages:
     # Links for languages to search in and the placeholder text for
-    # the serach box in that language.
+    # the search field in that language.
     code:
         link: ...
         placeholder: ...
+        # Optional text direction of the search field.
+        direction: ltr / rtl
 footer:
     # Logos and links in the footer.
   - block_type: logo
