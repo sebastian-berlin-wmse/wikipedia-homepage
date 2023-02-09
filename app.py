@@ -5,12 +5,10 @@ from flask import redirect
 import flask_babel
 from flask_babel import Babel
 from flask_babel import _
-from flask_babel import force_locale
 import requests
 import yaml
 
 app = Flask(__name__)
-app.config["BABEL_DEFAULT_LOCALE"] = "sv"
 babel = Babel(app)
 language = "sv"
 
@@ -73,5 +71,4 @@ def go():
 @babel.localeselector
 def get_locale():
     return language
-    # print(babel.default_locale)
-    # return request.view_args["search_language"]
+
