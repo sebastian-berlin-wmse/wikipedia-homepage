@@ -34,11 +34,17 @@ def start(search_language=None):
         if "attribution" in block:
             attributions.append(block["attribution"])
 
+    search_language_parameters = config["search_languages"][search_language]
+    search_language_parameters["code"] = search_language
+    if "placeholder" not in search_language_parameters:
+        default_language = config["search_languages"][language]
+        search_language_parameters["placeholder"] = default_language["placeholder"]
+
     return render_template(
         "index.html",
         lang=language,
         search_languages=config["search_languages"],
-        search_language=search_language,
+        search_language=search_language_parameters,
         footer=footer,
         attributions=attributions
     )
@@ -69,4 +75,5 @@ def go():
 
 @babel.localeselector
 def get_locale():
-    return "sv"
+    return language
+

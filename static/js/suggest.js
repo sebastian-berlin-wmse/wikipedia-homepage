@@ -9,7 +9,6 @@ var $searchField = $( "#txtSearch" );
 var $suggestions = $( ".search-suggestion" );
 var $searchSuggestionList = $( "#search-suggestion-list" );
 var $searchTerm = $( "#search-term" );
-var $searchFor = $( "#search-for" );
 
 function triggerSuggestLater( lang ) {
 	if ( suggestTimeout ) clearTimeout( suggestTimeout ); //kill suggestion timer
@@ -56,7 +55,6 @@ function getSearchLink( query, language, provider ) {
 function handleSearchSuggest( term, suggestions ) {
 	$suggestions.hide();
 	$searchSuggestionList.show();
-	$searchFor.attr( "href", getSearchLink( term, searchLang ) );
 	$searchTerm.text( term );
 
 	var i = 0;
