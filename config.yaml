@@ -1,18 +1,46 @@
 ---
 search_languages:
-    sv: Svenska
-    ar: العربية
-    bs: Bosanski
-    da: Dansk
-    de: Deutsch
-    en: English
-    es: Español
-    fa: فارسی
-    fi: Suomi
-    ku: Kurdî/كوردی
-    "no": ‪Norsk
-    se: Sámegiella
-    sr: Српски/Srpski
+    sv:
+        link: Svenska
+        placeholder: Sök på Wikipedia
+    ar:
+        link: العربية
+        placeholder: ابحث في ويكيبيديا
+        direction: rtl
+    bs:
+        link: Bosanski
+        placeholder: Pretraži Wikipediju
+    da:
+        link: Dansk
+        placeholder: Søg på Wikipedia
+    de:
+        link: Deutsch
+        placeholder: Wikipedia durchsuchen
+    en:
+        link: English
+        placeholder: Search Wikipedia
+    es:
+        link: Español
+        placeholder: Buscar en Wikipedia
+    fa:
+        link: فارسی
+        placeholder: جستجو در ویکی‌پدیا
+        direction: rtl
+    fi:
+        link: Suomi
+        placeholder: Hae Wikipediasta
+    ku:
+        link: Kurdî/كوردی
+        placeholder: Li ser Wîkîpediya bigere
+    "no":
+        link: ‪Norsk
+        placeholder: Søk i Wikipedia
+    se:
+        link: Sámegiella
+        placeholder: Oza Wikipedia:s
+    sr:
+        link: Српски/Srpski
+        placeholder: Претражите Википедију
 footer:
     - block_type: logo
       image: wikimedia-logo.svg
