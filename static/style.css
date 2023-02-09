@@ -263,6 +263,15 @@ p {
 	-webkit-tap-highlight-color: #36c;
 	outline: #36c;
 }
+
+.ltr {
+    direction: ltr;
+}
+
+.rtl {
+    direction: rtl;
+}
+
 @media (max-width: 330px) {
 	.search-form input {
 		max-width: 200px;

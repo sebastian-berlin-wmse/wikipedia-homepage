@@ -34,12 +34,14 @@ def start(search_language=None):
         if "attribution" in block:
             attributions.append(block["attribution"])
 
+    search_language_parameters = config["search_languages"][search_language]
+    search_language_parameters["code"] = search_language
+
     return render_template(
         "index.html",
         lang=language,
         search_languages=config["search_languages"],
-        search_language=search_language,
-        search_label=config["search_languages"][search_language]["placeholder"],
+        search_language=search_language_parameters,
         footer=footer,
         attributions=attributions
     )
