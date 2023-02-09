@@ -1,5 +1,16 @@
 #! /usr/local/bin python
 
+"""Retrieves a list of placeholder strings for the search field
+
+The strings are fetched from live Wikipedia, specifically from the
+search field. This will be what it looks like when you're not logged
+in, so it may differ from some skins.
+
+Each language specified in the config is processed. The output has the
+same format as in the config for easy copying.
+
+"""
+
 import requests
 import yaml
 from bs4 import BeautifulSoup as Soup
