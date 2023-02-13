@@ -8,8 +8,8 @@
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/wikipedia.png') }}" />
     <link rel="stylesheet" media="screen" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.cookie.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/suggest.js') }}" defer></script>
+    {% include "javascript.html" ignore missing %}
 </head>
 
 <body>
