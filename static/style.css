@@ -340,7 +340,7 @@ footer {
     flex-wrap: wrap;
 }
 
-#footer-content * {
+#footer-content > * {
     flex: 1 1 200px;
 }
 
@@ -348,13 +348,19 @@ footer a {
 	color: #fff;
 }
 
+footer h2 {
+    margin: 0;
+    margin-bottom: 0.5em;
+}
+
 .footer-link-list {
     list-style: none;
     padding-left: 1em;
+    margin: 0;
 }
 
 .footer-link-list li {
-    margin-bottom: 1em;
+    padding: 0.5em 0;
 }
 
 #logo-description {
