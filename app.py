@@ -40,13 +40,16 @@ def start(search_language=None):
         default_language = config["search_languages"][language]
         search_language_parameters["placeholder"] = default_language["placeholder"]
 
+    banner = config.get("banner")
+
     return render_template(
         "index.html",
         lang=language,
         search_languages=config["search_languages"],
         search_language=search_language_parameters,
         footer=footer,
-        attributions=attributions
+        attributions=attributions,
+        banner=config.get("banner")
     )
 
 @app.route("/suggest")

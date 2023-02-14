@@ -181,3 +181,12 @@ and (orientation : landscape) {
 		margin: 10px 0 0 0;
 	}
 }
+
+#banner {
+    width: 40em;
+    padding: 0 1em;
+    margin-top: 1em;
+    align-self: center;
+    border: 1px solid #a2a9b1;
+    border-radius: 2px;
+}
