@@ -13,8 +13,7 @@
 </head>
 <body>
     <div id="banner">
-        <h2>{{ banner.header }}</h2>
-        <p>{{ banner.body }}</p>
+        {% include "banner.html" ignore missing %}
     </div>
     <div id="main">
         <div class="wikipedia-logo">
