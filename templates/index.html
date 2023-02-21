@@ -2,7 +2,7 @@
 <html lang="{{ lang }}">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ _('Wikipedia, the free encyclopedia') }}</title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/wikipedia.png') }}" />
@@ -11,67 +11,61 @@
     <script type="text/javascript" src="{{ url_for('static', filename='js/suggest.js') }}" defer></script>
     {% include "javascript.html" ignore missing %}
 </head>
-
 <body>
-    <div id="WMDE-Banner-Container"></div>
     <div id="main">
-        <div id="mainbox">
-            <div class="wikipedia-logo">
-                <a href="https://{{ lang }}.wikipedia.org/"><img src="{{ url_for('static', filename='images/wikipedia-logo.svg') }}" title="{{ _('Wikipedia\'s main page') }}" alt="{{ _('Wikipedia - the free encyclopedia') }}"/></a>
-            </div>
-            <div id="maincontent">
-                <div id="form">
-                    {% if search_languages -%}
-                    <div class="search-languages">
-                        {% for code, language in search_languages.items() -%}
-                        <a href="{{ url_for('start') + code }}" {% if code == search_language.code %}class="current"{% endif %}>{{ language.link }}</a> •
-                        {% endfor -%}
-                        <a href="https://wikipedia.org/" >{{ _('More languages') }}</a>
-                    </div>
-                    {%- endif %}
-                    <form id="frmSearch" class="search-form" action="go" method="get" accept-charset="UTF-8">
-                        <input type="text" id="txtSearch" {% if search_language.direction %}class={{ search_language.direction }}{% endif %} name="q" alt="Search Criteria" onkeyup="triggerSuggestLater('{{ search_language.code }}')" autocomplete="off" placeholder="{{ search_language.placeholder }}" autofocus />
-                        <input type="hidden" name="l" value="{{ search_language.code }}" />
-                        <button type="submit" id="cmdSearch" class="button-ooui-like" name="b"><span class="search-icon"></span></button>
-                    </form>
-                </div>
-                <div id="search-suggestion-list">
-                    {% for _ in range(10) %}
-                    <a class="search-item search-suggestion"></a>
-                    {% endfor %}
-                </div>
-            </div>
-            <div id="wmde-banner-featurebox"></div>
+        <div class="wikipedia-logo">
+            <a href="https://{{ lang }}.wikipedia.org/"><img src="{{ url_for('static', filename='images/wikipedia-logo.svg') }}" title="{{ _('Wikipedia\'s main page') }}" alt="{{ _('Wikipedia - the free encyclopedia') }}"/></a>
         </div>
-        <footer>
-            <div id="footer-content">
-                {% for block in footer %}
-                <div>
-                    {% if block.block_type == "logo" %}
-                    {% if block.url %}<a href="{{ block.url }}">{% endif %}
-                        <img class="footer-logo" src="{{ url_for('static', filename='images/' + block.image) }}" alt="{{ block.alt }}">
-                        {% if block.url %}</a>{% endif %}
-                    {% if block.text %}<p id="logo-description">{{ block.text }}</p>{% endif %}
-                    {% elif block.block_type == "links" %}
-                    {% if block.header %}<h2>{{ block.header }}</h2>{% endif %}
-                    <ul class="footer-link-list">
-                        {% for label, url in block.links.items() %}
-                        <li><a href="{{ url }}">{{ label }}</a></li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                </div>
+        <div id="maincontent">
+            {% if search_languages -%}
+            <div class="search-languages">
+                {% for code, language in search_languages.items() -%}
+                <a href="{{ url_for('start') + code }}" {% if code == search_language.code %}class="current"{% endif %}>{{ language.link }}</a> •
+                {% endfor -%}
+                <a href="https://wikipedia.org/" >{{ _('More languages') }}</a>
+            </div>
+            {%- endif %}
+            <form id="frmSearch" class="search-form" action="go" method="get" accept-charset="UTF-8">
+                <input type="text" id="txtSearch" {% if search_language.direction %}class={{ search_language.direction }}{% endif %} name="q" alt="Search Criteria" onkeyup="triggerSuggestLater('{{ search_language.code }}')" autocomplete="off" placeholder="{{ search_language.placeholder }}" autofocus />
+                <input type="hidden" name="l" value="{{ search_language.code }}" />
+                <button type="submit" id="cmdSearch" class="button-ooui-like" name="b"><img src="{{ url_for('static', filename='images/wmde_search_icon.svg') }}"></button>
+            </form>
+            <div id="search-suggestion-list">
+                {% for _ in range(10) %}
+                <a class="search-item search-suggestion"></a>
                 {% endfor %}
             </div>
-            {% if attributions %}
-            <div id="attributions">
-                {{ _('Images:') }}
-                {%- for attribution in attributions -%}
-                {{ attribution|safe }}
-                {% endfor %}
-            </div>
-            {%- endif -%}
-        </footer>
+        </div>
     </div>
+    <footer>
+        <div id="footer-content">
+            {% for block in footer %}
+            <div>
+                {% if block.block_type == "logo" %}
+                {% if block.url %}<a href="{{ block.url }}">{% endif %}
+                    <img class="footer-logo" src="{{ url_for('static', filename='images/' + block.image) }}" alt="{{ block.alt }}">
+                    {% if block.url %}</a>{% endif %}
+                {% if block.text %}<p id="logo-description">{{ block.text }}</p>{% endif %}
+                {% elif block.block_type == "links" %}
+                {% if block.header %}<h2>{{ block.header }}</h2>{% endif %}
+                <ul class="footer-link-list">
+                    {% for label, url in block.links.items() %}
+                    <li><a href="{{ url }}">{{ label }}</a></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% if attributions %}
+        <div id="attributions">
+            {{ _('Images:') }}
+            {%- for attribution in attributions -%}
+            {{ attribution|safe }}
+            {% endfor %}
+        </div>
+        {%- endif -%}
+    </footer>
+</div>
 </body>
 </html>
