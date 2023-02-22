@@ -26,7 +26,7 @@ body {
 	height: 250px;
 }
 
-#maincontent {
+#main-content {
 	text-align: left;
 	margin-top: 2em;
 }
@@ -44,11 +44,11 @@ body {
     color: #575757;
 }
 
-.search-form {
+#search-form {
 	display: flex;
 }
 
-.search-form input {
+#search-field {
 	border-radius: 2px 0 0 2px;
 	box-sizing: border-box;
 	border: 1px solid #a2a9b1;
@@ -79,6 +79,7 @@ body {
 	font-size: 16px;
 	color: #575757;
 	padding-left: 10px;
+	outline: #36c;
 }
 
 .search-item:hover,
@@ -91,13 +92,13 @@ body {
 	font-weight: bold;
 }
 
-.search-form input:active,
-.search-form input:focus {
+#search-form input:active,
+#search-form input:focus {
 	border-color: #36c;
     border-width: 2px;
 }
 
-#cmdSearch {
+#search-button {
 	background-color: #36c;
 	border: none;
 	padding: 0;
@@ -107,12 +108,12 @@ body {
 	width: 90px;
 }
 
-#cmdSearch:hover {
+#search-button:hover {
 	background: #447ff5;
 	border-color: #447ff5;
 }
 
-#cmdSearch img {
+#search-button img {
     height: 25px;
 }
 
@@ -163,10 +164,6 @@ footer a {
     .wikipedia-logo img {
 		height: 200px;
 	}
-
-	#mainbox {
-		padding: 1em 1.5em 4em 1.5em;
-	}
 }
 
 /* iPad landscape selector to ensure input field is always on screen */
@@ -176,10 +173,8 @@ and (orientation : landscape) {
 	.wikipedia-logo img {
 		height: 200px;
 	}
-	#mainbox {
-		padding: 0 1.5em 4em 1.5em;
-	}
-	#maincontent {
+
+	#main-content {
 		margin: 10px 0 0 0;
 	}
 }

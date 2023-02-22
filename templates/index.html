@@ -16,7 +16,7 @@
         <div class="wikipedia-logo">
             <a href="https://{{ lang }}.wikipedia.org/"><img src="{{ url_for('static', filename='images/wikipedia-logo.svg') }}" title="{{ _('Wikipedia\'s main page') }}" alt="{{ _('Wikipedia - the free encyclopedia') }}"/></a>
         </div>
-        <div id="maincontent">
+        <div id="main-content">
             {% if search_languages -%}
             <div class="search-languages">
                 {% for code, language in search_languages.items() -%}
@@ -25,10 +25,10 @@
                 <a href="https://wikipedia.org/" >{{ _('More languages') }}</a>
             </div>
             {%- endif %}
-            <form id="frmSearch" class="search-form" action="go" method="get" accept-charset="UTF-8">
-                <input type="text" id="txtSearch" {% if search_language.direction %}class={{ search_language.direction }}{% endif %} name="q" alt="Search Criteria" onkeyup="triggerSuggestLater('{{ search_language.code }}')" autocomplete="off" placeholder="{{ search_language.placeholder }}" autofocus />
+            <form id="search-form" action="go" method="get" accept-charset="UTF-8">
+                <input type="text" id="search-field" {% if search_language.direction %}class={{ search_language.direction }}{% endif %} name="q" onkeyup="triggerSuggestLater('{{ search_language.code }}')" autocomplete="off" placeholder="{{ search_language.placeholder }}" autofocus />
                 <input type="hidden" name="l" value="{{ search_language.code }}" />
-                <button type="submit" id="cmdSearch" class="button-ooui-like" name="b"><img src="{{ url_for('static', filename='images/wmde_search_icon.svg') }}"></button>
+                <button type="submit" id="search-button"><img src="{{ url_for('static', filename='images/search-icon.svg') }}"></button>
             </form>
             <div id="search-suggestion-list">
                 {% for _ in range(10) %}
