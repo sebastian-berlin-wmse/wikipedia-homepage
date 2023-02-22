@@ -1,69 +1,34 @@
 body {
-	display: -webkit-box;
-	display: -ms-flexbox;
 	display: flex;
 	min-height: 100vh;
-	margin:0;
-	padding:0;
-	background-color:white;
-	font: 14px 'Helvetica Neue','Nimbus Sans','Helvetica','Arial',sans-serif;
-	-webkit-box-orient:vertical;
-	-webkit-box-direction:normal;
-	-ms-flex-direction:column;
-	flex-direction:column;
+	margin: 0;
+	background-color: white;
+	font: 14px "Helvetica Neue", "Nimbus Sans", "Helvetica", "Arial", sans-serif;
+	flex-direction: column;
+}
+
+.ltr {
+    direction: ltr;
+}
+
+.rtl {
+    direction: rtl;
 }
 
 #main {
-	-ms-flex: 1 0 auto;
 	flex: 1 0 auto;
     max-width: 40em;
 	text-align: center;
     align-self: center;
 }
 
-.exact-match {
-	font-weight: bold;
-}
-
-.search-item {
-	box-sizing: border-box;
-	width: 100%;
-	display: inline-block;
-	min-height: 25px;
-	line-height: 25px;
-	font-size: 15px;
-	color: #575757;
-	padding: 10px 20px 10px 10px;
-}
-
-.search-item:hover,
-.search-item:focus {
-	color: #575757;
-	background-color: #f3f3f3;
-}
-
-#search-suggestion-list {
-	position: absolute;
-	text-align: left;
-	background-color: #FFFFFF;
-	border: 1px solid #a2a9b1;
-	border-top: none;
-	display: none;
-	max-width: 40em;
-	box-sizing: border-box;
+.wikipedia-logo img {
+	height: 250px;
 }
 
 #maincontent {
 	text-align: left;
 	margin-top: 2em;
-}
-
-.search-form {
-	display: -webkit-box;
-	display: -moz-box;
-	display: -ms-flexbox;
-	display: -webkit-flex;
-	display: flex;
 }
 
 .search-languages {
@@ -79,6 +44,10 @@ body {
     color: #575757;
 }
 
+.search-form {
+	display: flex;
+}
+
 .search-form input {
 	border-radius: 2px 0 0 2px;
 	box-sizing: border-box;
@@ -86,20 +55,40 @@ body {
 	border-right: none;
 	height: 45px;
 	width: 100%;
-	padding: 0.5em;
+	padding: 10px;
 	font-size: 16px;
-	line-height: 1.6;
-	-webkit-appearance: textfield;
-	-webkit-tap-highlight-color: #36c;
 	outline: #36c;
 }
 
-.ltr {
-    direction: ltr;
+#search-suggestion-list {
+	position: absolute;
+	text-align: left;
+	background-color: #FFFFFF;
+	border: 1px solid #a2a9b1;
+	border-top: none;
+	display: none;
+	max-width: 40em;
+	box-sizing: border-box;
 }
 
-.rtl {
-    direction: rtl;
+.search-item {
+	box-sizing: border-box;
+	width: 100%;
+	display: inline-block;
+	line-height: 45px;
+	font-size: 16px;
+	color: #575757;
+	padding-left: 10px;
+}
+
+.search-item:hover,
+.search-item:focus {
+	color: #575757;
+	background-color: #f3f3f3;
+}
+
+.exact-match {
+	font-weight: bold;
 }
 
 .search-form input:active,
@@ -108,7 +97,7 @@ body {
     border-width: 2px;
 }
 
-.button-ooui-like {
+#cmdSearch {
 	background-color: #36c;
 	border: none;
 	padding: 0;
@@ -118,7 +107,7 @@ body {
 	width: 90px;
 }
 
-.button-ooui-like:hover {
+#cmdSearch:hover {
 	background: #447ff5;
 	border-color: #447ff5;
 }
@@ -133,6 +122,10 @@ footer {
 	color: #ffffff;
 }
 
+footer a {
+	color: #fff;
+}
+
 #footer-content {
     gap: 1em;
     display: flex;
@@ -141,10 +134,6 @@ footer {
 
 #footer-content * {
     flex: 1 1 200px;
-}
-
-footer a {
-	color: #fff;
 }
 
 .footer-link-list {
@@ -160,10 +149,6 @@ footer a {
     font-size: large;
     font-family: serif;
     font-style: italic;
-}
-
-.wikipedia-logo img {
-	height: 250px;
 }
 
 .footer-logo {
@@ -184,13 +169,6 @@ footer a {
 	}
 }
 
-#featurebox strong {
-	display: block;
-	font-size: 14px;
-	margin: 0 0 7px 0;
-	color: #202520;
-}
-
 /* iPad landscape selector to ensure input field is always on screen */
 @media (min-device-width : 768px)
 and (max-device-width : 1024px)
@@ -204,13 +182,4 @@ and (orientation : landscape) {
 	#maincontent {
 		margin: 10px 0 0 0;
 	}
-}
-
-#banner {
-    max-width: 40em;
-    padding: 0 1em;
-    margin-top: 1em;
-    align-self: center;
-    border: 1px solid #a2a9b1;
-    border-radius: 2px;
 }
