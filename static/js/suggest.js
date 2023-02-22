@@ -10,17 +10,22 @@ var $searchSuggestionList = $( "#search-suggestion-list" );
 var $searchTerm = $( "#search-term" );
 
 function triggerSuggestLater( lang ) {
-	if ( suggestTimeout ) clearTimeout( suggestTimeout ); //kill suggestion timer
+	if ( suggestTimeout ) {
+		clearTimeout( suggestTimeout ); //kill suggestion timer
+	}
 	suggestTimeout = setTimeout( searchSuggest, delay, lang );
 }
 
 function searchSuggest( language ) {
 	var str = $searchField.val();
 
-	if ( str == lastSearch ) return;
+	if ( str == lastSearch ) {
+		return;
+	}
+
 	lastSearch = str;
 
-	if ( str == "" ) {
+	if ( str === "" ) {
 		$searchSuggestionList.hide();
 	} else {
 		$.ajax( "suggest", {

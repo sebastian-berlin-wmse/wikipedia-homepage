@@ -76,3 +76,4 @@ def go():
 @babel.localeselector
 def get_locale():
     return language
+
