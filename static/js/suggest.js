@@ -1,37 +1,40 @@
 var ajaxCallTimeout = 5000;
 var suggestTimeout = null;
 var delay = 500;
-var searchLang = "de";
 var lastSearch = "";
-var searchPath = 'go';
+var searchPath = "go";
 
-var $searchField = $( "#txtSearch" );
+var $searchField = $( "#search-field" );
 var $suggestions = $( ".search-suggestion" );
 var $searchSuggestionList = $( "#search-suggestion-list" );
 var $searchTerm = $( "#search-term" );
 
 function triggerSuggestLater( lang ) {
-	if ( suggestTimeout ) clearTimeout( suggestTimeout ); //kill suggestion timer
-	suggestTimeout = setTimeout( "searchSuggest('" + lang + "')", delay );
+	if ( suggestTimeout ) {
+		clearTimeout( suggestTimeout ); //kill suggestion timer
+	}
+	suggestTimeout = setTimeout( searchSuggest, delay, lang );
 }
 
-function searchSuggest( lang ) {
-	searchLang = lang;
+function searchSuggest( language ) {
 	var str = $searchField.val();
 
-	if ( str == lastSearch ) return;
+	if ( str == lastSearch ) {
+		return;
+	}
+
 	lastSearch = str;
 
-	if ( str == "" ) {
+	if ( str === "" ) {
 		$searchSuggestionList.hide();
 	} else {
-		$.ajax( 'suggest', {
+		$.ajax( "suggest", {
 			data: {
-				lang: searchLang,
+				lang: language,
 				search: str
 			},
 			success: function( response ) {
-				handleSearchSuggest( str, response )
+				handleSearchSuggest( str, response, language )
 			},
 			timeout: ajaxCallTimeout
 		} );
@@ -44,15 +47,15 @@ function getSearchLink( query, language, provider ) {
 		q: query
 	};
 
-	if ( typeof provider === 'string' ) {
+	if ( typeof provider === "string" ) {
 		queryParams.e = provider;
-		queryParams.s = 'search';
+		queryParams.s = "search";
 	}
 
-	return searchPath + '?' + $.param( queryParams );
+	return searchPath + "?" + $.param( queryParams );
 }
 
-function handleSearchSuggest( term, suggestions ) {
+function handleSearchSuggest( term, suggestions, language ) {
 	$suggestions.hide();
 	$searchSuggestionList.show();
 	$searchTerm.text( term );
@@ -61,8 +64,7 @@ function handleSearchSuggest( term, suggestions ) {
 	for ( var suggestion of suggestions ) {
 		var $element = $suggestions.eq(i);
 		$element.text( suggestion );
-		$element.attr( "href", getSearchLink( suggestion, searchLang ) )
-		console.log(suggestion, term);
+		$element.attr( "href", getSearchLink( suggestion, language ) )
 		if ( suggestion.toLowerCase() === term.toLowerCase() ) {
 			$element.addClass( "exact-match" );
 		} else {
@@ -90,7 +92,7 @@ $searchSuggestionList.on( "keydown", function( event ) {
 	}
 } );
 
-$( "#frmSearch" ).on( "keydown", function( event ) {
+$( "#search-form" ).on( "keydown", function( event ) {
 	if ( event.key === "ArrowDown" ) {
 		$suggestions.eq( 0 ).focus();
 		event.preventDefault();
@@ -99,7 +101,7 @@ $( "#frmSearch" ).on( "keydown", function( event ) {
 
 // Hide suggestion list when none of the search controls (search
 // field, button or suggestion list) are in focus.
-var searchControls = "#txtSearch, #cmdSearch, .search-item";
+var searchControls = "#search-field, #search-button, .search-item";
 $( searchControls ).on( "focus", function() {
 	if( lastSearch ) {
 		$searchSuggestionList.show();
