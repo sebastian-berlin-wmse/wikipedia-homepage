@@ -20,6 +20,7 @@ body {
     max-width: 40em;
 	text-align: center;
     align-self: center;
+    padding: 1em 1em 0 1em;
 }
 
 .wikipedia-logo img {
@@ -60,6 +61,12 @@ body {
 	outline: #36c;
 }
 
+#search-field:active,
+#search-field:focus {
+	border-color: #36c;
+    border-width: 2px;
+}
+
 #search-suggestion-list {
 	position: absolute;
 	text-align: left;
@@ -90,12 +97,6 @@ body {
 
 .exact-match {
 	font-weight: bold;
-}
-
-#search-form input:active,
-#search-form input:focus {
-	border-color: #36c;
-    border-width: 2px;
 }
 
 #search-button {
@@ -133,7 +134,7 @@ footer a {
     flex-wrap: wrap;
 }
 
-#footer-content * {
+#footer-content > * {
     flex: 1 1 200px;
 }
 
@@ -143,7 +144,7 @@ footer a {
 }
 
 .footer-link-list li {
-    margin-bottom: 1em;
+    margin-top: 1em;
 }
 
 #logo-description {
