@@ -2,11 +2,13 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from flask import redirect
+from flask import url_for
 import flask_babel
 from flask_babel import Babel
 from flask_babel import _
 import requests
 import yaml
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -14,9 +16,12 @@ language = "sv"
 
 @app.route("/")
 @app.route("/<search_language>")
-def start(search_language=None):
-    if not search_language:
+def start(search_language=None, banner=None):
+    if search_language is None:
         search_language = "sv"
+    # if banner is None:
+    #     banner = "banner.html"
+
     with open("config.yaml") as config_file:
         config = yaml.safe_load(config_file)
 
@@ -48,8 +53,8 @@ def start(search_language=None):
         search_languages=config["search_languages"],
         search_language=search_language_parameters,
         footer=footer,
-        attributions=attributions# ,
-        # banner="banner.html"
+        attributions=attributions,
+        banner=banner
     )
 
 @app.route("/suggest")
@@ -75,6 +80,17 @@ def go():
     query = request.args.get("q")
     url = f"http://{language}.wikipedia.org/wiki/{query}"
     return redirect(url)
+
+@app.route("/review")
+def review():
+    url = request.args.get("url")
+    selector = request.args.get("selector")
+    # url = "https://se.wikimedia.org/wiki/Anv%C3%A4ndare:Sebastian_Berlin_(WMSE)/Tmp"
+    response = requests.get(url).text
+    soup = BeautifulSoup(response, "html.parser")
+    html = soup.select(selector)[0]
+
+    return start(banner=html)
 
 @babel.localeselector
 def get_locale():

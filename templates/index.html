@@ -13,7 +13,13 @@
 </head>
 <body>
     <div id="main">
-        {% include "banner.html" ignore missing %}
+        <div id="banner">
+            {% if banner %}
+            {{ banner|safe }}
+            {% else %}
+            {% include "banner.html" ignore missing %}
+            {% endif %}
+        </div>
         <div class="wikipedia-logo">
             <a href="https://{{ lang }}.wikipedia.org/"><img src="{{ url_for('static', filename='images/wikipedia-logo.svg') }}" title="{{ _('Wikipedia\'s main page') }}" alt="{{ _('Wikipedia - the free encyclopedia') }}"/></a>
         </div>

@@ -23,37 +23,29 @@ body {
     padding: 1em 1em 0 1em;
 }
 
-#banner {
-    /*! max-width: 40em; */
-    /* max-height: 40em; */
-    padding: 0.7em;
-    /* margin-top: 1em; */
-    /* margin-top: 1em; */
-    /* align-self: center; */
-    /*! border-radius: 2px; */
-    /*! border-radius: 10px; */
-    /*! box-shadow: 0 0 10px #a2a9b1; */
-    /*! background: yellow; */
-    /*! font-weight: bold; */
-    /*! font-size: initial; */
-    border-style: ridge;
-    border-width: 1em;
-    border-color: #86643f;
-    background: #d4eaff;
-}
+/* #banner { */
+/*     /\*! max-width: 40em; *\/ */
+/*     /\* max-height: 40em; *\/ */
+/*     padding: 0.7em; */
+/*     /\* margin-top: 1em; *\/ */
+/*     /\* margin-top: 1em; *\/ */
+/*     /\* align-self: center; *\/ */
+/*     /\*! border-radius: 2px; *\/ */
+/*     border-radius: 10px; */
+/*     box-shadow: 0 0 10px #a2a9b1; */
+/*     /\*! background: yellow; *\/ */
+/*     /\*! font-weight: bold; *\/ */
+/*     /\*! font-size: initial; *\/ */
+/* } */
 
-#banner h2 {
-    margin: 0 0 0.2em 0;
-    /*! text-decoration: underline; */
-    font-family: cursive;
-    font-size: xx-large;
-}
+/* #banner h2 { */
+/*     margin: 0 0 0.5em 0; */
+/* } */
 
-#banner p {
-    text-align: center;
-    margin: 0;
-    font-family: serif;
-}
+/* #banner p { */
+/*     text-align: justify; */
+/*     margin: 0; */
+/* } */
 
 .wikipedia-logo img {
 	height: 250px;
