@@ -12,10 +12,8 @@
     {% include "javascript.html" ignore missing %}
 </head>
 <body>
-    <div id="banner">
-        {% include "banner.html" ignore missing %}
-    </div>
     <div id="main">
+        {% include "banner.html" ignore missing %}
         <div class="wikipedia-logo">
             <a href="https://{{ lang }}.wikipedia.org/"><img src="{{ url_for('static', filename='images/wikipedia-logo.svg') }}" title="{{ _('Wikipedia\'s main page') }}" alt="{{ _('Wikipedia - the free encyclopedia') }}"/></a>
         </div>

@@ -23,6 +23,28 @@ body {
     padding: 1em 1em 0 1em;
 }
 
+#banner {
+    max-width: 40em;
+    /* max-height: 40em; */
+    padding: 1em;
+    margin-top: 1em;
+    /* margin-top: 1em; */
+    /* align-self: center; */
+    /* border: 1px solid #a2a9b1; */
+    border-radius: 2px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #a2a9b1;
+}
+
+#banner h2 {
+    margin: 0 0 1em 0;
+}
+
+#banner p {
+    text-align: justify;
+    margin: 0;
+}
+
 .wikipedia-logo img {
 	height: 250px;
 }
@@ -167,6 +189,15 @@ footer a {
     .wikipedia-logo img {
 		height: 200px;
 	}
+
+    /* #banner { */
+    /*     /\* width: 40em; *\/ */
+    /*     padding: 0 1em; */
+    /*     margin-top: 1em; */
+    /*     align-self: center; */
+    /*     border: 1px solid #a2a9b1; */
+    /*     border-radius: 2px; */
+    /* } */
 }
 
 /* iPad landscape selector to ensure input field is always on screen */
@@ -180,13 +211,4 @@ and (orientation : landscape) {
 	#main-content {
 		margin: 10px 0 0 0;
 	}
-}
-
-#banner {
-    width: 40em;
-    padding: 0 1em;
-    margin-top: 1em;
-    align-self: center;
-    border: 1px solid #a2a9b1;
-    border-radius: 2px;
 }
