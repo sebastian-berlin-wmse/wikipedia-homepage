@@ -85,12 +85,29 @@ def go():
 def review():
     url = request.args.get("url")
     selector = request.args.get("selector")
+    html = get_banner_html(url, selector)
     # url = "https://se.wikimedia.org/wiki/Anv%C3%A4ndare:Sebastian_Berlin_(WMSE)/Tmp"
+    # response = requests.get(url).text
+    # soup = BeautifulSoup(response, "html.parser")
+    # html = soup.select(selector)[0]
+
+    return start(banner=html)
+
+def get_banner_html(url, selector):
     response = requests.get(url).text
     soup = BeautifulSoup(response, "html.parser")
     html = soup.select(selector)[0]
+    return html
 
-    return start(banner=html)
+@app.route("/banner")
+def banner():
+    url = request.args.get("url")
+    selector = request.args.get("selector")
+    html = get_banner_html(url, selector)
+    with open("templates/banner.html", "w") as f:
+        f.write(str(html))
+
+    return start()
 
 @babel.localeselector
 def get_locale():
