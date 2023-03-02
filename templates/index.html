@@ -20,7 +20,7 @@
             {% if search_languages -%}
             <div class="search-languages">
                 {% for code, language in search_languages.items() -%}
-                <a href="{{ url_for('start') + code }}" {% if code == search_language.code %}class="current"{% endif %}>{{ language.link }}</a> •
+                <a href="{{ url_for('start', language=code) }}" {% if code == search_language.code %}class="current"{% endif %}>{{ language.link }}</a> •
                 {% endfor -%}
                 <a href="https://wikipedia.org/" >{{ _('More languages') }}</a>
             </div>

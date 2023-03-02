@@ -2,6 +2,7 @@ from flask import Flask
 from flask import render_template
 from flask import request
 from flask import redirect
+from flask import url_for
 import flask_babel
 from flask_babel import Babel
 from flask_babel import _
@@ -13,12 +14,16 @@ babel = Babel(app)
 language = "sv"
 
 @app.route("/")
-@app.route("/<search_language>")
-def start(search_language=None):
-    if not search_language:
-        search_language = "sv"
+def start():
+    search_language = request.args.get("language")
     with open("config.yaml") as config_file:
         config = yaml.safe_load(config_file)
+
+    if (
+            not search_language or
+            config.get("search_languages").get(search_language) is None
+    ):
+        search_language = "sv"
 
     if "footer" in config:
         footer = config["footer"]
