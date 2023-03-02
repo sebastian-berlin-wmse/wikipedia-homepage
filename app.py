@@ -13,6 +13,7 @@ from bs4 import BeautifulSoup
 app = Flask(__name__)
 babel = Babel(app)
 language = "sv"
+config = None
 
 @app.route("/")
 @app.route("/<search_language>")
@@ -81,10 +82,18 @@ def go():
     url = f"http://{language}.wikipedia.org/wiki/{query}"
     return redirect(url)
 
-@app.route("/review")
-def review():
-    url = request.args.get("url")
-    selector = request.args.get("selector")
+@app.route("/preview")
+def preview():
+    # url = request.args.get("url")
+    banner = Config.get("banner")
+    if not banner:
+        return "Missing banner"
+
+    url = banner.get("url")
+    if not url:
+        return "Missing banner"
+
+    selector = banner.get("selector")
     html = get_banner_html(url, selector)
     # url = "https://se.wikimedia.org/wiki/Anv%C3%A4ndare:Sebastian_Berlin_(WMSE)/Tmp"
     # response = requests.get(url).text
@@ -95,8 +104,11 @@ def review():
 
 def get_banner_html(url, selector):
     response = requests.get(url).text
-    soup = BeautifulSoup(response, "html.parser")
-    html = soup.select(selector)[0]
+    if selector:
+        soup = BeautifulSoup(response, "html.parser")
+        html = "\n".join([str(e) for e in soup.select(selector)])
+    else:
+        html = response
     return html
 
 @app.route("/banner")
@@ -113,3 +125,11 @@ def banner():
 def get_locale():
     return language
 
+class Config:
+    _values = None
+
+    def get(key):
+        if Config._values is None:
+            with open("config.yaml") as config_file:
+                Config._values = yaml.safe_load(config_file)
+        return Config._values.get(key)
