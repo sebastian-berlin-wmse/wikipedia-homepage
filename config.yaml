@@ -47,15 +47,16 @@ footer:
       url: https://wikimedia.se
       alt: Wikimedia Sverige
     - block_type: links
-      header: Wikimedia Sverige
-      links:
-          Om oss: https://wikimedia.se/om-oss/
-          Integritetspolicy: https://wikimedia.se/integritetspolicy
-    - block_type: links
       header: Engagera dig
       links:
           Bli medlem: http://nymedlem.wikimedia.se/
           Donera: https://wikimedia.se/donera/
+    - block_type: links
+      header: Wikimedia Sverige
+      links:
+          Om oss: https://wikimedia.se/om-oss/
+          Integritetspolicy: https://wikimedia.se/integritetspolicy
+          Om wikipedia.se: https://se.wikimedia.org/wiki/Wikipedia.se
     - block_type: logo
       image: 90-konto-logo.png
       url: https://www.insamlingskontroll.se/90-konto-organisationer/
