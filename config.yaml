@@ -59,6 +59,7 @@ footer:
           Om wikipedia.se: https://se.wikimedia.org/wiki/Wikipedia.se
     - block_type: logo
       image: 90-konto-logo.png
+      width: 200px
       url: https://www.insamlingskontroll.se/90-konto-organisationer/
       alt: 90-konto, svensk insamlingskontroll
 ...
