@@ -43,7 +43,7 @@
             <div>
                 {% if block.block_type == "logo" %}
                 {% if block.url %}<a href="{{ block.url }}">{% endif %}
-                    <img class="footer-logo" src="{{ url_for('static', filename='images/' + block.image) }}" alt="{{ block.alt }}">
+                    <img class="footer-logo" {% if block.width %}style="width: {{block.width}};"{% endif %} src="{{ url_for('static', filename='images/' + block.image) }}" alt="{{ block.alt }}">
                     {% if block.url %}</a>{% endif %}
                 {% if block.text %}<p id="logo-description">{{ block.text }}</p>{% endif %}
                 {% elif block.block_type == "links" %}
