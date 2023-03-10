@@ -9,6 +9,7 @@ from flask_babel import _
 import requests
 import yaml
 from bs4 import BeautifulSoup
+from bs4 import Comment
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -86,6 +87,7 @@ def go():
 def preview():
     # url = request.args.get("url")
     banner = Config.get("banner")
+    # print(banner)
     if not banner:
         return "Missing banner"
 
@@ -94,7 +96,8 @@ def preview():
         return "Missing banner"
 
     selector = banner.get("selector")
-    html = get_banner_html(url, selector)
+    html = get_banner_html(url, selector)#.strip()
+    print(html)
     # url = "https://se.wikimedia.org/wiki/Anv%C3%A4ndare:Sebastian_Berlin_(WMSE)/Tmp"
     # response = requests.get(url).text
     # soup = BeautifulSoup(response, "html.parser")
@@ -106,7 +109,13 @@ def get_banner_html(url, selector):
     response = requests.get(url).text
     if selector:
         soup = BeautifulSoup(response, "html.parser")
-        html = "\n".join([str(e) for e in soup.select(selector)])
+        for e in soup.find_all(string=True):
+            if isinstance(e, Comment):
+                e.extract()
+        # html = ""
+        # for element in soup.select(selector)[0].contents:
+        html = soup.select(selector)[0]
+        # html = "\n".join([str(e) for e in soup.select(selector)[0].contents])
     else:
         html = response
     return html

@@ -23,8 +23,12 @@ body {
     padding: 1em 1em 0 1em;
 }
 
-/* #banner { */
-/*     /\*! max-width: 40em; *\/ */
+#banner {
+    all: initial;
+    display: block;
+    width: 100%;
+    overflow: auto;
+    /*     /\*! max-width: 40em; *\/ */
 /*     /\* max-height: 40em; *\/ */
 /*     padding: 0.7em; */
 /*     /\* margin-top: 1em; *\/ */
@@ -36,7 +40,7 @@ body {
 /*     /\*! background: yellow; *\/ */
 /*     /\*! font-weight: bold; *\/ */
 /*     /\*! font-size: initial; *\/ */
-/* } */
+}
 
 /* #banner h2 { */
 /*     margin: 0 0 0.5em 0; */
