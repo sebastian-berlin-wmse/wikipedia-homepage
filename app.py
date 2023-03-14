@@ -1,13 +1,18 @@
+import logging
+import yaml
+
 from flask import Flask
+from flask import abort
+from flask import redirect
 from flask import render_template
 from flask import request
-from flask import redirect
 from flask import url_for
 import flask_babel
 from flask_babel import Babel
 from flask_babel import _
 import requests
-import yaml
+from requests import Timeout
+from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -67,9 +72,27 @@ def suggest():
         "apprefix": search,
         "format": "json"
     }
-    response = requests.get(url, params=parameters).json()
+    try:
+        response = requests.get(url, params=parameters, timeout=1.0).json()
+    except Timeout as e:
+        logging.error("Timeout for request to Wikipedia API.", exc_info=e)
+        abort(504)
+    except Exception as e:
+        logging.error("Error for request to Wikipedia API.", exc_info=e)
+        abort(500)
     suggestions = [p["title"] for p in response["query"]["allpages"]]
-    return suggestions;
+    return suggestions
+
+@app.errorhandler(HTTPException)
+def handle_exception(e):
+    response = e.get_response()
+    response.data = json.dumps({
+        "code": e.code,
+        "name": e.name,
+        "description": e.description,
+    })
+    response.content_type = "application/json"
+    return response
 
 @app.route("/go")
 def go():

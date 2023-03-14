@@ -23,8 +23,6 @@ function searchSuggest( language ) {
 		return;
 	}
 
-	lastSearch = str;
-
 	if ( str === "" ) {
 		$searchSuggestionList.hide();
 	} else {
@@ -35,6 +33,7 @@ function searchSuggest( language ) {
 			},
 			success: function( response ) {
 				handleSearchSuggest( str, response, language )
+				lastSearch = str;
 			},
 			timeout: ajaxCallTimeout
 		} );
