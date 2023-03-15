@@ -62,4 +62,7 @@ footer:
       width: 200px
       url: https://www.insamlingskontroll.se/90-konto-organisationer/
       alt: 90-konto, svensk insamlingskontroll
+banner:
+    url: https://se.wikimedia.org/wiki/Wikipedia.se/Banner/Innehåll
+    selector: .mw-parser-output
 ...
