@@ -119,12 +119,3 @@ def banner():
 @babel.localeselector
 def get_locale():
     return language
-
-# class Config:
-#     _values = None
-
-#     def get(key):
-#         if Config._values is None:
-#             with open("config.yaml") as config_file:
-#                 Config._values = yaml.safe_load(config_file)
-#         return Config._values.get(key)
