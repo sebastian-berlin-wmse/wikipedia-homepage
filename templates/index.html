@@ -27,7 +27,7 @@
             {% if search_languages -%}
             <div class="search-languages">
                 {% for code, language in search_languages.items() -%}
-                <a href="{{ url_for('start') + code }}" {% if code == search_language.code %}class="current"{% endif %}>{{ language.link }}</a> •
+                <a href="{{ url_for('start', language=code) }}" {% if code == search_language.code %}class="current"{% endif %}>{{ language.link }}</a> •
                 {% endfor -%}
                 <a href="https://wikipedia.org/" >{{ _('More languages') }}</a>
             </div>
@@ -50,7 +50,7 @@
             <div>
                 {% if block.block_type == "logo" %}
                 {% if block.url %}<a href="{{ block.url }}">{% endif %}
-                    <img class="footer-logo" src="{{ url_for('static', filename='images/' + block.image) }}" alt="{{ block.alt }}">
+                    <img class="footer-logo" {% if block.width %}style="width: {{block.width}};"{% endif %} src="{{ url_for('static', filename='images/' + block.image) }}" alt="{{ block.alt }}">
                     {% if block.url %}</a>{% endif %}
                 {% if block.text %}<p id="logo-description">{{ block.text }}</p>{% endif %}
                 {% elif block.block_type == "links" %}
