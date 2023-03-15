@@ -3,6 +3,7 @@ from flask import render_template
 from flask import request
 from flask import redirect
 from flask import url_for
+from flask import g
 import flask_babel
 from flask_babel import Babel
 from flask_babel import _
@@ -22,38 +23,42 @@ def start(search_language=None, banner=None):
     if search_language is None:
         search_language = "sv"
 
-    with open("config.yaml") as config_file:
-        config = yaml.safe_load(config_file)
-
-    if "footer" in config:
-        footer = config["footer"]
-    else:
-        # Empty list instead of None to make the template code a bit
-        # cleaner.
-        footer = []
-
+    footer = config().get("footer", [])
     attributions = []
-    if "wikipedia_logo_attribution" in config:
-        attributions.append(config["wikipedia_logo_attribution"])
+    if "wikipedia_logo_attribution" in config():
+        attributions.append(config()["wikipedia_logo_attribution"])
     for block in footer:
         if "attribution" in block:
             attributions.append(block["attribution"])
 
-    search_language_parameters = config["search_languages"][search_language]
+    search_language_parameters = config()["search_languages"][search_language]
     search_language_parameters["code"] = search_language
     if "placeholder" not in search_language_parameters:
-        default_language = config["search_languages"][language]
+        default_language = config()["search_languages"][language]
         search_language_parameters["placeholder"] = default_language["placeholder"]
 
     return render_template(
         "index.html",
         lang=language,
-        search_languages=config["search_languages"],
+        search_languages=config()["search_languages"],
         search_language=search_language_parameters,
         footer=footer,
         attributions=attributions,
         banner=banner
     )
+
+def config():
+    """Get config
+
+    Loads config the first time this is used and saves it for later
+    access.
+
+    """
+    if g.get("config") is None:
+        with open("config.yaml") as config_file:
+            g.config = yaml.safe_load(config_file)
+
+    return g.config
 
 @app.route("/suggest")
 def suggest():
@@ -87,11 +92,14 @@ def preview():
     return start(banner=banner_html)
 
 def get_banner_html(url=None, selector=None):
-    if url is None:
-        with open("config.yaml") as config_file:
-            config = yaml.safe_load(config_file)
+    """Generate HTML for the banner
 
-        banner = config.get("banner", {})
+    Uses url and selector from parameters if given and values from
+    config if not.
+
+    """
+    if url is None:
+        banner = config().get("banner", {})
         url = banner.get("url")
         if not url:
             message = "Missing config variable <code>banner: url</code>."
