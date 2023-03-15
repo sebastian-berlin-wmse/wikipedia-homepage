@@ -143,7 +143,10 @@ def get_banner_html(url=None, selector=None):
     return html
 
 @app.route("/set-banner")
-def banner():
+def set_banner():
+    banner = config().get("banner", {})
+    url = banner.get("url")
+    selector = banner.get("selector")
     html = get_banner_html(url, selector)
     with open("templates/banner.html", "w") as f:
         f.write(str(html))
@@ -153,4 +156,3 @@ def banner():
 @babel.localeselector
 def get_locale():
     return language
-
