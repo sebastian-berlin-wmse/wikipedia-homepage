@@ -1,3 +1,6 @@
 __pycache__/
 
+translations/**/*.mo
+
 config.yaml
+templates/banner.html
