@@ -23,6 +23,20 @@ body {
     padding: 1em 1em 0 1em;
 }
 
+#banner {
+    all: initial;
+    display: block;
+    width: 100%;
+    overflow: auto;
+}
+
+.error {
+    border: solid thin red;
+    color: red;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+
 .wikipedia-logo img {
 	height: 250px;
 }
@@ -167,6 +181,15 @@ footer a {
     .wikipedia-logo img {
 		height: 200px;
 	}
+
+    /* #banner { */
+    /*     /\* width: 40em; *\/ */
+    /*     padding: 0 1em; */
+    /*     margin-top: 1em; */
+    /*     align-self: center; */
+    /*     border: 1px solid #a2a9b1; */
+    /*     border-radius: 2px; */
+    /* } */
 }
 
 /* iPad landscape selector to ensure input field is always on screen */
