@@ -21,8 +21,6 @@ config = None
 def start(search_language=None, banner=None):
     if search_language is None:
         search_language = "sv"
-    # if banner is None:
-    #     banner = "banner.html"
 
     with open("config.yaml") as config_file:
         config = yaml.safe_load(config_file)
@@ -46,8 +44,6 @@ def start(search_language=None, banner=None):
     if "placeholder" not in search_language_parameters:
         default_language = config["search_languages"][language]
         search_language_parameters["placeholder"] = default_language["placeholder"]
-
-    # banner = config.get("banner")
 
     return render_template(
         "index.html",
@@ -83,47 +79,37 @@ def go():
     url = f"http://{language}.wikipedia.org/wiki/{query}"
     return redirect(url)
 
-@app.route("/preview")
+@app.route("/preview-banner")
 def preview():
-    # url = request.args.get("url")
-    banner = Config.get("banner")
-    # print(banner)
-    if not banner:
-        return "Missing banner"
+    url = request.args.get("url")
+    selector = request.args.get("selector")
+    banner_html = get_banner_html(url, selector)
+    return start(banner=banner_html)
 
-    url = banner.get("url")
-    if not url:
-        return "Missing banner"
+def get_banner_html(url=None, selector=None):
+    if url is None:
+        with open("config.yaml") as config_file:
+            config = yaml.safe_load(config_file)
 
-    selector = banner.get("selector")
-    html = get_banner_html(url, selector)#.strip()
-    print(html)
-    # url = "https://se.wikimedia.org/wiki/Anv%C3%A4ndare:Sebastian_Berlin_(WMSE)/Tmp"
-    # response = requests.get(url).text
-    # soup = BeautifulSoup(response, "html.parser")
-    # html = soup.select(selector)[0]
+        banner = config.get("banner", {})
+        url = banner.get("url")
+        if not url:
+            message = "Missing config variable <code>banner: url</code>."
+            return render_template("banner-error.html", message=message)
 
-    return start(banner=html)
+        selector = banner.get("selector")
 
-def get_banner_html(url, selector):
     response = requests.get(url).text
     if selector:
         soup = BeautifulSoup(response, "html.parser")
-        for e in soup.find_all(string=True):
-            if isinstance(e, Comment):
-                e.extract()
-        # html = ""
-        # for element in soup.select(selector)[0].contents:
         html = soup.select(selector)[0]
-        # html = "\n".join([str(e) for e in soup.select(selector)[0].contents])
     else:
         html = response
+
     return html
 
-@app.route("/banner")
+@app.route("/set-banner")
 def banner():
-    url = request.args.get("url")
-    selector = request.args.get("selector")
     html = get_banner_html(url, selector)
     with open("templates/banner.html", "w") as f:
         f.write(str(html))
@@ -134,11 +120,11 @@ def banner():
 def get_locale():
     return language
 
-class Config:
-    _values = None
+# class Config:
+#     _values = None
 
-    def get(key):
-        if Config._values is None:
-            with open("config.yaml") as config_file:
-                Config._values = yaml.safe_load(config_file)
-        return Config._values.get(key)
+#     def get(key):
+#         if Config._values is None:
+#             with open("config.yaml") as config_file:
+#                 Config._values = yaml.safe_load(config_file)
+#         return Config._values.get(key)

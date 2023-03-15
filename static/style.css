@@ -51,6 +51,13 @@ body {
 /*     margin: 0; */
 /* } */
 
+.error {
+    border: solid thin red;
+    color: red;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+
 .wikipedia-logo img {
 	height: 250px;
 }
