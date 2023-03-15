@@ -23,6 +23,28 @@ flask run
 
 Add `--debug` when developing to make your life easier.
 
+# Endpoints
+
+## `/suggest`
+
+Used internally to fetch search suggestions.
+
+## `/go`
+
+Used internally to go to a Wikipedia page.
+
+## `/preview-banner`
+
+Used to get a preview of a banner without saving it. Uses variables
+under `banner` from config.yaml.  Parameters `url` and `selector` can
+be used to use content from another URL in the preview. See
+config.yaml for details.
+
+## `/set-banner`
+
+Saves banner content for subsequent visits. Uses variables under
+`banner` from config.yaml.
+
 # Maintenance Scripts
 
 These scripts can help with setting up, but aren't used during

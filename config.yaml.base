@@ -32,4 +32,11 @@ footer:
     links:
         # A number of links defined as:
         Label: URL
+banner:
+    # Used when previewing or setting banner content. Fetches content
+    # from this URL and adds it in the banner area.
+    url: https://...
+    # Optional CSS selector. If specified, only the first element
+    # matching this selector will be added from the HTML.
+    selector: ...
 ...
