@@ -124,13 +124,14 @@ def get_banner_html(url=None, selector=None):
     config if not.
 
     """
+    banner = config().get("banner", {})
     if url is None:
-        banner = config().get("banner", {})
         url = banner.get("url")
         if not url:
             message = "Missing config variable <code>banner: url</code>."
             return render_template("banner-error.html", message=message)
 
+    if selector is None:
         selector = banner.get("selector")
 
     response = requests.get(url).text
